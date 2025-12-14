@@ -82,7 +82,7 @@ CREATE TABLE Rankings (
     rank_2     VARCHAR(100),
     rank_3     VARCHAR(100),
     rank_4     VARCHAR(100),
-    rank_5     VARCHAR(100)
+    rank_5     VARCHAR(100),
     rank_6     VARCHAR(100),
     rank_7     VARCHAR(100),
     rank_8     VARCHAR(100),
