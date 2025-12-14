@@ -1,0 +1,59 @@
+conference_id,name,seo
+1,NWC,nwc
+2,IND,independent
+3,SWAC,swac
+4,CCS,ccs
+5,ASUN,asun
+6,Horizon,horizon
+7,HCAC,hcac
+8,SCIAC,sciac
+9,SAA,saa
+10,Patriot,patriot
+11,Atlantic East,atlantic-east
+12,MIAC,miac
+13,American Rivers,american-rivers
+14,CCAA,ccaa
+15,NEWMAC,newmac
+16,Little East,little-east
+17,CNE,cne
+18,Skyline,skyline
+19,North Atlantic,north-atlantic
+20,Great Northeast,great-northeast
+21,MASCAC,mascac
+22,Michigan Intercol. Ath. Assn.,michigan-intercol-ath-assn
+23,Liberty League,liberty-league
+24,Empire 8,empire-8
+25,DIII Independent,diii-independent
+26,Landmark,landmark
+27,PAC,pac
+28,UMAC,umac
+29,NACC,nacc
+30,ODAC,odac
+31,MAC Commonwealth,mac-commonwealth
+32,Centennial,centennial
+33,NJAC,njac
+34,SUNYAC,sunyac
+35,MAC Freedom,mac-freedom
+36,SCAC,scac
+37,USA South,usa-south
+38,United East,united-east
+39,CCIW,cciw
+40,UAA,uaa
+41,SLIAC,sliac
+42,WIAC,wiac
+43,AMCC,amcc
+44,MWC,mwc
+45,C2C,c2c
+46,ASC,asc
+47,OAC,oac
+48,NCAC,ncac
+49,Peach Belt,peach-belt
+50,Lone Star,lone-star
+51,CUNYAC,cunyac
+52,G-MAC,g-mac
+53,NESCAC,nescac
+54,Conference Carolinas,conference-carolinas
+55,DII Independent,dii-independent
+56,WAC,wac
+57,America East,america-east
+58,PacWest,pacwest

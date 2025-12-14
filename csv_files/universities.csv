@@ -1,0 +1,484 @@
+university_id,name,conference_id
+ADRIAN,Adrian College,22
+AG SCT,Agnes Scott College,4
+ALBION,Albion College,22
+ALBMAG,Albertus Magnus College,20
+ALBRHT,Albright College,31
+ALBYST,Albany State University (Georgia),49
+ALCLYD,Alice Lloyd,2
+ALFRED,Alfred University,24
+ALFRST,Alfred State College,43
+ALLEGH,Allegheny College,27
+ALLEN,Allen University,55
+ALMA,Alma College,22
+ALVRNI,Alvernia University,31
+AMHRST,Amherst College,53
+AND IN,Anderson University (Indiana),7
+ANNAMA,Anna Maria College,21
+AR BAP,Arlington Baptist,2
+ARCADI,Arcadia University,35
+ARK PB,"University of Arkansas, Pine Bluff",3
+ASBURY,Asbury University,4
+AUG IL,Augustana College (Illinois),39
+AUGSBU,Augsburg University,12
+AURORA,Aurora University,29
+AUSTIN,Austin College,36
+AVERET,Averett University,30
+AZ CHR,Arizona Christian,2
+BABSON,Babson College,15
+BALDWA,Baldwin Wallace University,47
+BARD,Bard College,23
+BATES,Bates College,53
+BELH,Belhaven University,4
+BELLAR,Bellarmine University,5
+BELOIT,Beloit College,44
+BENILL,Benedictine University (Illinois),29
+BEREA,Berea College,7
+BERKS,Penn State Berks College,38
+BERRY,Berry College,9
+BETHEL,Bethel University (Minnesota),12
+BETHLU,Bethany Lutheran College,28
+BETHWV,Bethany College (West Virginia),27
+BKLYN,Brooklyn College,51
+BLACKB,Blackburn College,41
+BLUFF,Bluffton University,7
+BLUMTN,Blue Mountain (MS),
+BOB JO,Bob Jones,2
+BOWDOI,Bowdoin College,53
+BRAND,Brandeis University,40
+BRIDST,Bridgewater State University,21
+BRIDVA,Bridgewater College (Virginia),30
+BRKPRT,State University of New York at Brockport,24
+BRNMWR,Bryn Mawr College,32
+BRVARD,Brevard College,37
+BUENVI,Buena Vista University,13
+BUFFST,"Buffalo State, State University of New York",34
+C-M-S,Claremont McKenna-Harvey Mudd-Scripps Colleges,8
+CAIRN,Cairn University,38
+CALLUT,California Lutheran University,8
+CALTEC,California Institute of Technology,8
+CALVIN,Calvin University,22
+CANTON,State University of New York at Canton,34
+CAPTAL,Capital University,47
+CARLET,Carleton College,12
+CARMEL,Carnegie Mellon University,40
+CARRMT,Carroll (MT),2
+CARROL,Carroll University (Wisconsin),39
+CARTH,Carthage College,39
+CASE,Case Western Reserve University,40
+CASTLE,Vermont State University Castleton,16
+CATH,Catholic University,26
+CBYSAW,Colby-Sawyer College,20
+CCNY,The City College of New York,51
+CEDAR,Cedar Crest College,38
+CENBAP,Central Baptist,2
+CENPEN,Central Penn,2
+CENTLA,Centenary College (Louisiana),36
+CENTNJ,Centenary University (New Jersey),11
+CENTRE,Centre College,9
+CENTRL,Central College (Iowa),13
+CHAPMN,Chapman University,8
+CHATHA,Chatham University,27
+CHICAG,University of Chicago,40
+CHRNEW,Christopher Newport University,45
+CLARKS,Clarkson University,23
+CLMBST,Columbus State University,49
+CLRKMA,Clark University (Massachusetts),15
+COAST,U.S. Coast Guard Academy,15
+COBLES,State University of New York at Cobleskill,19
+COE,Coe College,13
+COL ID,Col. of Idaho,2
+COLBY,Colby College,53
+COLUMC,Columbia (SC),2
+CONCCH,Concordia University Chicago,29
+CONCMH,"Concordia College, Moorhead",12
+CONCNE,Concordia (NE),2
+CONCTX,Concordia University Texas,36
+CONCWI,Concordia University Wisconsin,29
+CORCOL,Cornell College,44
+CORT,State University of New York at Cortland,34
+COVENT,Covenant College,4
+CROWN,Crown College (Minnesota),28
+CSUSB,"California State University, San Bernardino",14
+CT COL,Connecticut College,53
+CURRY,Curry College,17
+DAKST,Dakota St.,2
+DAKWES,Dakota Wesleyan,2
+DALLAS,University of Dallas,36
+DALTON,Dalton St.,2
+DART,Dartmouth,
+DEAN,Dean College,20
+DELVAL,Delaware Valley University,35
+DENISO,Denison University,48
+DEPAUW,DePauw University,48
+DESALE,DeSales University,35
+DICKIN,Dickinson College,32
+DOM CA,Dominican University of California,58
+DOM IL,Dominican University (Illinois),29
+DREW,Drew University,26
+DUBUQU,University of Dubuque,13
+EARLHA,Earlham College,7
+EASTRN,Eastern University,31
+ECSU,Eastern Connecticut State University,16
+ELIZBT,Elizabethtown College,26
+ELMHUR,Elmhurst University,39
+ELMIRA,Elmira College,24
+ELMS,Elms College,20
+EMENNO,Eastern Mennonite University,30
+EMERSO,Emerson College,15
+EMM MA,Emmanuel College (Massachusetts),20
+EMORY,Emory University,40
+ENDICO,Endicott College,17
+ERSKIN,Erskine College,54
+ETEXBA,East Texas Baptist University,46
+EUREKA,Eureka College,41
+EVANGL,Evangel,
+EVGRST,Evergreen St.,2
+EWOOD,Edgewood University,29
+FARMST,Farmingdale State College,18
+FDUFLO,"Fairleigh Dickinson University, Florham",35
+FERRUM,Ferrum College,54
+FISHER,Fisher,2
+FITCH,Fitchburg State University,21
+FR&MAR,Franklin & Marshall College,32
+FRAMST,Framingham State University,21
+FRANCI,Franciscan University of Steubenville,27
+FRANK,Franklin College,7
+FREDON,The State University of New York at Fredonia,34
+FREPAC,Fresno Pacific University,58
+GCHER,Goucher College,26
+GENEVA,Geneva College,27
+GEOFOX,George Fox University,1
+GETTYS,Gettysburg College,32
+GFALLS,Providence (MT),
+GORDON,Gordon College,17
+GRCBBL,Grace Christian (MI),2
+GREENS,Greensboro College,37
+GRINN,Grinnell College,44
+GRNVL,Greenville University,41
+GROVE,Grove City College,27
+GUILF,Guilford College,30
+GUSTAD,Gustavus Adolphus College,12
+GWYMER,Gwynedd Mercy University,11
+HAMLIN,Hamline University,12
+HAMLTN,Hamilton College,53
+HANNIB,Hannibal-La Grange,2
+HARSIM,Hardin-Simmons University,46
+HARSTW,Harris-Stowe,2
+HAVFRD,Haverford College,32
+HEIDEL,Heidelberg University,47
+HENDRX,Hendrix College,36
+HILBRT,Hilbert College,43
+HIRAM,Hiram College,27
+HNOVER,Hanover College,7
+HNTGDN,Huntingdon College,4
+HOLLIN,Hollins University,30
+HOOD,Hood College,31
+HOPE,Hope College,22
+HOPEIN,Hope Int'l,2
+HOPKNS,Johns Hopkins University,32
+HOUGHT,Houghton University,24
+HOWPAY,Howard Payne University,46
+HRTFRD,University of Hartford,17
+HRTWCK,Hartwick College,24
+HUSSON,Husson University,19
+HUSTIL,Huston-Tillotson,2
+ILLCOL,Illinois College,44
+ILLTEC,Illinois Institute of Technology,29
+ILLWES,Illinois Wesleyan University,39
+IMMAC,Immaculata University,11
+IND E,Ind.-East,2
+ITHACA,Ithaca College,23
+JHNSON,Johnson (TN),2
+JOHNST,Vermont State University-Johnson,19
+JONCAR,John Carroll University,48
+JONJAY,John Jay College of Criminal Justice,51
+JOWARI,Johnson & Wales University (Providence),17
+JUNIAT,Juniata College,26
+KALAMA,Kalamazoo College,22
+KEAN,Kean University,33
+KEENE,Keene State College,16
+KENYON,Kenyon College,48
+KEUKA,Keuka,24
+KEYSTN,Keystone College,38
+KINGPA,King's College (Pennsylvania),35
+KNOX,Knox College,44
+KY CHR,Ky. Christian,2
+KY WES,Kentucky Wesleyan College,52
+LAGRAN,LaGrange College,4
+LAKLND,Lakeland University,29
+LANBIB,Lancaster Bible College,38
+LAROCH,La Roche University,43
+LASELL,Lasell University,20
+LAVERN,University of La Verne,8
+LAWREN,Lawrence University,44
+LEBVAL,Lebanon Valley College,35
+LEHMAN,Lehman College,51
+LESLEY,Lesley University,19
+LETOUR,LeTourneau University,36
+LEWCLA,Lewis & Clark College,1
+LINFLD,Linfield University,1
+LK FOR,Lake Forest College,44
+LORAS,Loras College,13
+LOURDS,Lourdes,2
+LPC,LIFE Pacific,2
+LUTHER,Luther College,13
+LYCOM,Lycoming College,26
+LYN,University of Lynchburg,30
+LYNDON,Vermont State University Lyndon,19
+LYON,Lyon College,41
+MACALE,Macalester College,12
+MADONN,Madonna,2
+MANCHS,Manchester University,7
+MANHTV,Manhattanville University,18
+MARBAP,Maranatha Baptist University,25
+MARIAN,Marian University (Wisconsin),29
+MARIET,Marietta College,47
+MARTLU,Martin Luther College,28
+MARYBA,Mary Baldwin University,37
+MARYTN,Maryville College (Tennessee),4
+MARYVA,Marymount University (Virginia),11
+MARYWA,University of Mary Washington,45
+MARYWD,Marywood University,11
+MASSMA,Massachusetts Maritime Academy,21
+MASTRS,Master's,2
+MCDAN,McDaniel College,32
+MCLA,Massachusetts College of Liberal Arts,21
+MCMURR,McMurry University,36
+MDGST,Middle Georgia State University,49
+ME PI,University of Maine at Presque Isle,19
+MEDGEV,Medgar Evers College,51
+MEFARM,"University of Maine, Farmington",19
+MEMARI,Maine Maritime Academy,19
+MENLO,Menlo College,58
+MERDTH,Meredith College,37
+MERMAR,U.S. Merchant Marine Academy,18
+MESSIA,Messiah University,31
+METHOD,Methodist University,37
+MHARBA,University of Mary Hardin-Baylor,46
+MICHDE,Mich.-Dearborn,2
+MIDDLE,Middlebury College,53
+MILLIK,Millikin University,39
+MISERI,Misericordia University,35
+MIT,Massachusetts Institute of Technology,15
+MITCH,Mitchell College,20
+MLLSAP,Millsaps College,9
+MNE FK,Me.-Fort Kent,2
+MNMORR,"University of Minnesota, Morris",28
+MON IL,Monmouth College (Illinois),44
+MONTCL,Montclair State University,33
+MORAV,Moravian University,26
+MRVLST,State University of New York at Morrisville,34
+MSM NY,Mount Saint Mary College (New York),18
+MSOE,Milwaukee School of Engineering,29
+MT ALO,Mount Aloysius College,43
+MT MRY,Mount Mary University,2
+MT STJ,Mount St. Joseph University,7
+MT STV,University of Mount Saint Vincent,18
+MT UNI,University of Mount Union,47
+MTHOLY,Mount Holyoke College,15
+MUHLEN,Muhlenberg College,32
+MUSKIN,Muskingum University,47
+MUW,Mississippi University for Women,41
+N KY,Northern Kentucky University,6
+NAVY,U.S. Naval Academy,10
+NAZARE,Nazareth University,24
+NC ILL,North Central College,39
+NC MIN,North Central University,28
+NC WES,North Carolina Wesleyan University,37
+ND MD,Notre Dame of Maryland University,38
+NE COL,New England College,20
+NEBWES,Nebraska Wesleyan University,13
+NEUMAN,Neumann University,11
+NEWENG,University of New England,17
+NICHOL,Nichols College,17
+NJCU,New Jersey City University,33
+NO PRK,North Park University,39
+NORWCH,Norwich University,20
+NWSTPL,University of Northwestern-St. Paul,28
+NWWASH,Northwest (WA),2
+NYU,New York University,40
+OBERLN,Oberlin College,48
+OCCID,Occidental College,8
+OGLETH,Oglethorpe University,9
+OH WES,Ohio Wesleyan University,48
+OHNRTN,Ohio Northern University,47
+OLDWES,State University of New York at Old Westbury,18
+OLIVET,The University of Olivet,22
+OLOTL,Our Lady of the Lake,2
+ONEONT,State University of New York at Oneonta,34
+OSWEGO,State University of New York at Oswego,34
+OTTER,Otterbein University,47
+OZARKS,University of the Ozarks (Arkansas),36
+PAC LU,Pacific Lutheran University,1
+PAC OR,Pacific University (Oregon),1
+PEACE,William Peace University,37
+PENCLG,Pennsylvania College of Technology,38
+PFEIFF,Pfeiffer University,37
+PIEDMT,Piedmont University,4
+PITTBR,"University of Pittsburgh, Bradford",43
+PITTGR,"University of Pittsburgh, Greensburg",43
+PLATTS,Plattsburgh State University of New York,34
+PLYMOU,Plymouth State University,16
+POINT,Point U.,2
+POMPIT,Pomona-Pitzer Colleges,8
+PRATT,Pratt Institute,11
+PRINCI,Principia College,41
+PSU AB,"Penn State University, Abington",38
+PSU AL,"Penn State University, Altoona",43
+PSU BE,"Pennsylvania State Univ. Erie, the Behrend College",43
+PSU HA,Penn State Harrisburg,38
+PUGSND,University of Puget Sound,1
+PURCH,"Purchase College, State University of New York",18
+RAMAPO,Ramapo College,33
+RANDOL,Randolph College,30
+RANMAC,Randolph-Macon College,30
+REDLAN,University of Redlands,8
+REG MA,Regis College (Massachusetts),20
+RHODES,Rhodes College,9
+RI COL,Rhode Island College,16
+RICHST,Stockton University,33
+RIPON,Ripon College,44
+RIT,Rochester Institute of Technology,23
+RIVIER,Rivier University,20
+ROANOK,Roanoke College,30
+ROCHNY,University of Rochester,40
+ROCKFO,Rockford University,29
+ROGWIL,Roger Williams University,17
+ROSHUL,Rose-Hulman Institute of Technology,7
+ROWAN,Rowan University,33
+RPI,Rensselaer Polytechnic Institute,23
+RUTCAM,"Rutgers, The State Univ. of New Jersey, Camden",33
+RUTNEW,"Rutgers, The State Univ. of New Jersey, Newark",33
+S ME,University of Southern Maine,16
+SAGE,Russell Sage College,24
+SAL ST,Salem State University,21
+SALEM,Salem College (North Carolina),37
+SALISB,Salisbury University,45
+SALVRE,Salve Regina University,15
+SCHREI,Schreiner,36
+SCRANT,University of Scranton,26
+SEWANE,University of the South,9
+SHAW,Shaw University,55
+SHEN,Shenandoah University,30
+SIMM,Simmons University,20
+SIMPSN,Simpson College,13
+SKIDMO,Skidmore College,23
+SMITH,Smith College,15
+SO VA,Southern Virginia University,37
+SPALD,Spalding University,41
+SPRING,Springfield College,15
+SRHLAW,Sarah Lawrence College,18
+ST BEN,College of Saint Benedict,12
+ST LAW,St. Lawrence University,23
+ST THOM,University of St. Thomas (Texas),36
+ST VIN,Saint Vincent College,27
+STCATH,St. Catherine University,12
+STELIZ,Saint Elizabeth University,11
+STEVE,Stevenson University,31
+STEVEN,Stevens Institute of Technology,35
+STJOBR,St. Joseph's University NY (Brooklyn),18
+STJOCT,University of Saint Joseph (Connecticut),20
+STJOFI,St. John Fisher University,24
+STJOLI,"St. Joseph's University, New York L.I.",18
+STJOME,Saint Joseph's College (Maine),20
+STMYIN,Saint Mary's College (Indiana),22
+STMYMD,St. Mary's College of Maryland,38
+STMYMN,Saint Mary's University of Minnesota,12
+STNORB,St. Norbert College,29
+STOLAF,St. Olaf College,12
+STSCHO,The College of St. Scholastica,12
+SUFFLK,Suffolk University,17
+SULROS,Sul Ross State University,50
+SUNY D,State University of New York at Delhi,19
+SUNYGE,State University of New York at Geneseo,24
+SUNYIT,State University of New York Polytechnic Institute,24
+SUNYMA,State University of New York Maritime College,18
+SUNYNP,State University of New York at New Paltz,34
+SUNYPO,State University of New York at Potsdam,34
+SUSQUE,Susquehanna University,26
+SW TX,Southwestern University (Texas),9
+SWADVE,S'western Adventist,
+SWARTH,Swarthmore College,32
+SWCRST,Southwestern Christ.,2
+SWTBRI,Sweet Briar College,30
+TALLAD,Talladega,2
+TARLET,Tarleton State University,56
+TCNJ,The College of New Jersey,33
+THIEL,Thiel College,27
+THOMAS,Thomas College,19
+TOCCOA,Toccoa Falls,2
+TOUGLO,Tougaloo,2
+TRIBAP,Trinity Baptist,2
+TRINCT,Trinity College (Connecticut),53
+TRINE,Trine University,22
+TRINTX,Trinity University (Texas),9
+TRNSYL,Transylvania University,7
+TRNWSH,Trinity Washington University,25
+TUFTS,Tufts University,53
+TX COL,Texas Col.,2
+TX LUT,Texas Lutheran University,36
+TX SOU,Texas Southern University,3
+UCSC,"University of California, Santa Cruz",45
+UMASSB,University of Massachusetts Boston,16
+UMASSD,"University of Massachusetts, Dartmouth",16
+UNH,University of New Hampshire,57
+UNION,Union College (New York),23
+URSNUS,Ursinus College,32
+UTICA,Utica University,24
+UW EC,University of Wisconsin-Eau Claire,42
+UW LAC,University of Wisconsin-La Crosse,42
+UW OSH,University of Wisconsin-Oshkosh,42
+UW PLA,University of Wisconsin-Platteville,42
+UW RF,University of Wisconsin-River Falls,42
+UW SP,University of Wisconsin-Stevens Point,42
+UW ST,University of Wisconsin-Stout,42
+UW SUP,University of Wisconsin-Superior,28
+UW WW,University of Wisconsin-Whitewater,42
+VA ST,Virginia State University,55
+VA WES,Virginia Wesleyan University,30
+VALFRG,University of Valley Forge,38
+VASSAR,Vassar College,23
+W CONN,Western Connecticut State University,16
+W NE,Western New England University,17
+WA STL,Washington University in St. Louis,40
+WAJEFF,Washington and Jefferson College,27
+WALDRF,Waldorf,2
+WARPAC,Warner Pacific,2
+WARREN,Warren Wilson College,45
+WASHMD,Washington College (Maryland),32
+WASLEE,Washington and Lee University,30
+WAYNES,Waynesburg University,27
+WEBSTE,Webster University,41
+WELLES,Wellesley College,15
+WENTWO,Wentworth Institute of Technology,17
+WES CT,Wesleyan University (Connecticut),53
+WES GA,Wesleyan College (Georgia),4
+WESTFS,Westfield State University,21
+WESTMO,Westminster College (Missouri),41
+WESTPA,Westminster College (Pennsylvania),27
+WHEATI,Wheaton College (Illinois),39
+WHEATM,Wheaton College (Massachusetts),15
+WHITMA,Whitman College,1
+WHITTI,Whittier College,8
+WHITWO,Whitworth University,1
+WI LUT,Wisconsin Lutheran College,29
+WIDEN,Widener University,31
+WILEY,Wiley,2
+WILKES,Wilkes University,26
+WILLIA,Williams College,53
+WILMOH,Wilmington College (Ohio),47
+WILSON,Wilson College,38
+WITTEN,Wittenberg University,48
+WLWOOD,William Woods,2
+WM PAT,William Paterson University of New Jersey,33
+WM SMI,William Smith College,23
+WMETTE,Willamette University,1
+WOOSTR,The College of Wooster,48
+WORCST,Worcester State University,21
+WPI,Worcester Polytechnic Institute,15
+WRTBRG,Wartburg College,13
+YESHIV,Yeshiva University,18
+YORKNY,York College (New York),51
+YORKPA,York College (Pennsylvania),31
+asbury,Asbury University,4

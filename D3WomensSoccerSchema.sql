@@ -13,17 +13,15 @@ DROP TABLE IF EXISTS University;
 CREATE TABLE University (
     university_id  INT PRIMARY KEY,
     name           VARCHAR(100),
-    city           VARCHAR(100),
-    state          VARCHAR(2),
     conference_id  INT,
     FOREIGN KEY (conference_id) REFERENCES Conference(conference_id)
 );
 
 DROP TABLE IF EXISTS Conference;
 CREATE TABLE Conference (
-    conference_id  INT PRIMARY KEY,
-    region         VARCHAR(50),
-    school         VARCHAR(100)
+    conference_id       INT PRIMARY KEY,
+    conference_name     VARCHAR(100),
+    seo                 VARCHAR(100)
 );
 
 DROP TABLE IF EXISTS Game;
