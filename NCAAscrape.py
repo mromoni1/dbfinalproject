@@ -1,46 +1,49 @@
 import requests
 import time
+import json
+from datetime import datetime
+from games import populate_games, write_game_ids
+from gamestats import populate_game_stats
 
-BASE_URL = "https://ncaa-api.henrygd.me"
-RATE_LIMIT_DELAY = 0.25  # 4 requests/sec (API limit is 5/sec)
+BASE_URL = "http://localhost:3000"
+RATE_LIMIT_DELAY = 0.0
+_session = requests.Session()
+
+GAMES_CSV_FILE = "games.csv"
+GAMES_CSV_FIELDS = [
+    "game_id",
+    "home_team_id",
+    "away_team_id",
+    "home_score",
+    "away_score",
+    "location",
+    "game_date",
+    "game_time",
+]
 
 class NCAAAPIError(Exception):
     pass
 
-def ncaa_get(endpoint, params=None):
-    url = f"{BASE_URL}{endpoint}"
+def ncaa_get(path, params=None, headers=None, timeout=30):
+    url = f"{BASE_URL}{path}"
+    r = _session.get(url, params=params, headers=headers, timeout=timeout)
+    if r.status_code != 200:
+        raise NCAAAPIError(f"Error {r.status_code} for {url}: {r.text}")
+    if RATE_LIMIT_DELAY:
+        time.sleep(RATE_LIMIT_DELAY)
+    return r.json()
 
-    response = requests.get(url, params=params)
-    if response.status_code != 200:
-        raise NCAAAPIError(
-            f"Error {response.status_code} for {url}: {response.text}"
-        )
-
-    time.sleep(RATE_LIMIT_DELAY)
-    return response.json()
 
 def main():
-    # Example parameters
-    sport = "soccer-women"
-    division = "d3"
-    season_year = 2025
-    month = "09"
+    # COLLECT GAME IDS 
+    # write_game_ids()
 
-    try:
-        schedule = ncaa_get(
-            f"/schedule/{sport}/{division}/{season_year}/{month}"
-        )
+    # GAMES
+    populate_games()
 
-        print(f"Fetched schedule for {sport}, {month}/{season_year}")
+    # GAMESTATS 
+    #populate_game_stats()
+    
 
-        for day in schedule.get("gameDates", []):
-            date = day["contest_date"]
-            games = day["games"]
-            print(f"{date}: {games} games")
-
-    except Exception as e:
-        print("Error during scrape:", e)
-
-    print("Scrape finished.")
 if __name__ == "__main__":
     main()
