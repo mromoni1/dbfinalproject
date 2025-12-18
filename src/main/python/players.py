@@ -2,8 +2,8 @@
 import csv
 import os
 
-PLAYERS_CSV = "players.csv"
-GAMESTATS_CSV = "gamestats.csv"
+PLAYERS_CSV = "../output/Player.csv"
+GAMESTATS_CSV = "../output/GameStats.csv"
 
 PLAYER_FIELDS = [
     "player_id",
@@ -39,7 +39,7 @@ def populate_players_from_gamestats():
                 "player_id": pid,
                 "first_name": r["first_name"],
                 "last_name": r["last_name"],
-                "class_grade": "",          # ✅ fixed
+                "class_grade": "",          
                 "position": r["position"],
                 "university_id": int(r["university_id"]),
             })
