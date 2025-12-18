@@ -34,16 +34,21 @@ QUERIES = { # same as in queries.sql
         "sql": """
 SELECT
   player_id,
+  first_name, 
+  last_name,
   total_goals,
   total_minutes,
   1.0 * total_goals / NULLIF(total_minutes, 0) AS goals_per_minute
 FROM (
   SELECT
     gs.player_id,
+    p.first_name, 
+    p.last_name,
     SUM(gs.goals) AS total_goals,
     SUM(gs.minutes) AS total_minutes
   FROM GameStats gs
   JOIN Game g ON g.game_id = gs.game_id
+  JOIN Player p on gs.player_id = p.player_id
   GROUP BY gs.player_id
 )
 WHERE total_minutes > 0
