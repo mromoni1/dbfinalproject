@@ -105,3 +105,20 @@ td {
 tr:hover {
     background-color: #fdf2f8;
 }
+
+th {
+    cursor: pointer;
+    background-color: #ffd6e8;
+    color: #7a003c;
+    user-select: none;
+}
+
+th:hover {
+    background-color: #ffb3d9;
+}
+
+.sort-indicator {
+    font-size: 0.8em;
+    margin-left: 4px;
+    opacity: 0.6;
+}
