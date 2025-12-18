@@ -80,28 +80,45 @@ CREATE TABLE Player (
 
 DROP TABLE IF EXISTS GameStats;
 CREATE TABLE GameStats (
-    game_id          INTEGER,
-    player_id        INTEGER,
-    played           BOOLEAN,
-    started          BOOLEAN,
-    shots            INTEGER,
-    shots_on_target  INTEGER,
-    goals            INTEGER,
-    assists          INTEGER,
-    minutes          INTEGER,
-    pk_attempt       INTEGER,
-    pk_made          INTEGER,
-    gw               BOOLEAN,
-    yc               INTEGER,
-    rc               INTEGER,
+    game_id         INTEGER NOT NULL,
+    player_id       INTEGER NOT NULL,
+
+    -- player snapshot (denormalized on purpose)
+    first_name      VARCHAR(50),
+    last_name       VARCHAR(50),
+    position        VARCHAR(20),
+    university_id   INTEGER,
+
+    -- participation flags
+    played          BOOLEAN,
+    started         BOOLEAN,
+
+    -- per-game stats
+    shots           INTEGER,
+    shots_on_target INTEGER,
+    goals           INTEGER,
+    assists         INTEGER,
+    minutes         INTEGER,
+    pk_attempt      INTEGER,
+    pk_made         INTEGER,
+    gw              BOOLEAN,
+    yc              INTEGER,
+    rc              INTEGER,
+
     PRIMARY KEY (game_id, player_id),
+
     FOREIGN KEY (game_id)
         REFERENCES Game(game_id)
         ON DELETE CASCADE,
+
     FOREIGN KEY (player_id)
         REFERENCES Player(player_id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (university_id)
+        REFERENCES University(university_id)
 );
+
 
 DROP VIEW IF EXISTS PlayerDerivedStats;
 CREATE VIEW PlayerDerivedStats AS
