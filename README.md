@@ -1,14 +1,16 @@
 # dbfinalproject
+# Maria Romo-Nichols and Megha Salvi 
 
 Web-scraped NCAA DIII women's soccer statistics from the 2025 season to populate a SQL database and perform interesting queries
 
 # Installation
 python3 -m pip install -r requirements.txt # make sure requirements are installed 
+
 python ./csv_to_sql.py # populate database with precomputed csv from scraped data 
+
 python src/main/python/frontend/app.py # run app 
 
-# After running app.py, app will be available at:
-# http://127.0.0.1:5000
+After running app.py, app will be available at: http://127.0.0.1:5001
 
 # Web Scraping 
 Used public API from henrygd to scrape consumable data from NCAA.com 
@@ -27,17 +29,14 @@ Games
 
 Players
 * Total rostered player data was not available. Our player table consists of all players who saw playing time in the 2025 season.
-* Player_id was not provided by the data. We generated unique player_ids according to this schema: 
+* Player_id was not provided by the data. We generated unique player_ids according to this formula:
+  
 player_id = hash(f"{team_id}:{first}:{last}") % 10**9 
 * Player grade was not provided by the data source. 
 
 Universities 
-* The API does not contain city or state information for any school. As such, we decided to adapt our schema for this. We may pivot to using external resources to fill in this information.
-
+* The API did not contain city or state information for any school. We removed these attributes from our schema as such. 
+  
 PlayerSeasonStats
-* added new table for aggregate stats across the 2025 season
-
-# Installation 
-pip install -r requirements.txt
-python3 ./NCAAscrape.py
+* Update from Phase I proposal: added new table for aggregate stats across the 2025 season
 
