@@ -2,18 +2,16 @@
 
 ### Environment
 
-Validation was performed using **Java 11**, leveraging its built-in concurrency utilities to parallelize game validation while maintaining compliance with API constraints.
+Validation was performed using **Java 11** to leverage its built-in concurrency utilities to parallelize game validation while maintaining compliance with API constraints.
 
 ### API Rate Limiting
 
-The NCAA public API enforces a **maximum of 5 requests per second per IP**. To respect this limitation while processing a large dataset efficiently, the complete set of game IDs (August–December) was divided into two independent subsets and validated in separate runs.
+The NCAA public API enforces a **maximum of 5 requests per second per IP**. To respect this limitation while processing a large dataset efficiently, we divided the complete set of game IDs (August–December) into two independent subsets and validated each subset in separate runs.
 
-Each run implemented:
+To enable controlled parallelism without triggering API throttling, we implemented each run with:
 
 - A fixed-size thread pool
 - A global rate limiter to ensure the 5 requests/second constraint was never exceeded
-
-This approach enabled controlled parallelism without triggering API throttling.
 
 ### Dataset Partitioning and Results
 
@@ -25,9 +23,9 @@ This approach enabled controlled parallelism without triggering API throttling.
 
 ### Outcome
 
-Each game ID was validated by querying the game-level endpoint and confirming:
+We validated each game ID by querying the game-level endpoint and confirming:
 
 - `sportCode = WSO` (Women’s Soccer)
 - `division = 3` (NCAA Division III)
 
-Only game IDs meeting both criteria were retained for downstream play-by-play and statistics extraction.
+We only kept game IDs meeting both criteria for downstream play-by-play and statistics extraction.
