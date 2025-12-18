@@ -6,8 +6,6 @@ Web-scraped NCAA DIII women's soccer statistics from the 2025 season to populate
 # Installation
 python3 -m pip install -r requirements.txt # make sure requirements are installed 
 
-python ./csv_to_sql.py # populate database with precomputed csv from scraped data 
-
 python src/main/python/frontend/app.py # run app 
 
 After running app.py, app will be available at: http://127.0.0.1:5001
