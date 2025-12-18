@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 from api import ncaa_get   # ← SAFE, one direction only
 
-GAME_CSV_FILE = "newgames.csv"
+GAME_CSV_FILE = "octdev.csv"
 GAME_CSV_FIELDS = [
     "game_id",
     "home_team_id",
@@ -79,8 +79,6 @@ def write_game_ids():
     return game_ids
 
 
-
-
 def parse_single_game_for_csv(game_data):
     contests = game_data.get("contests", [])
     if not contests:
@@ -123,7 +121,7 @@ def games_to_csv(games, filename=GAME_CSV_FILE):
             writer.writerow(game)
 
 def populate_games():
-    with open("game_ids.json", "r") as f:
+    with open("validated_ids/validated_oct_nov_game_ids.json", "r") as f:
         game_ids = json.load(f)
 
     rows = []
