@@ -185,10 +185,13 @@ WITH per_player AS (
 with_conf AS (
   SELECT
     c.conference_name,
+    plyr.first_name,
+    plyr.last_name,
     p.*,
     1.0 * sog / NULLIF(shots, 0) AS sog_pct
   FROM per_player p
-  JOIN University u ON u.university_id = p.university_id
+  JOIN Player plyr ON p.player_id = plyr.player_id
+  JOIN University u ON u.university_id = plyr.university_id
   JOIN Conference c ON c.conference_id = u.conference_id
   WHERE shots > 0
 ),
@@ -197,7 +200,7 @@ ranked AS (
          ROW_NUMBER() OVER (PARTITION BY conference_name ORDER BY sog_pct DESC) AS rn
   FROM with_conf
 )
-SELECT conference_name, player_id, first_name, last_name, university_id, sog_pct
+SELECT conference_name, player_id, first_name, last_name, sog_pct
 FROM ranked
 WHERE rn = 1
 ORDER BY conference_name;

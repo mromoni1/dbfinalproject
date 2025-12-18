@@ -103,6 +103,7 @@ CREATE TABLE GameStats (
         REFERENCES Game(game_id)
         ON DELETE CASCADE
 
+    -- Player reads from GameStats -> explicitly defining FOREIGN KEY (player_id) would not work because Player is not defined yet
 );
 
 
