@@ -3,6 +3,9 @@
 Web-scraped NCAA DIII women's soccer statistics from the 2025 season to populate a SQL database and perform interesting queries
 
 # Installation
+python3 -m pip install -r requirements.txt # make sure requirements are installed 
+python ./csv_to_sql.py # populate database with precomputed csv from scraped data 
+python src/main/python/frontend/app.py # run app 
 
 # Web Scraping 
 Used public API from henrygd to scrape consumable data from NCAA.com 

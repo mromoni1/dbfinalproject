@@ -1,6 +1,37 @@
--- queries.sql
+from flask import Flask, render_template, request
+import sqlite3
 
--- Which player scored the most goals per minute in the 2025 season?
+app = Flask(__name__)
+
+def get_db():
+    return sqlite3.connect("D3WomensSoccer.db")
+
+@app.route("/", methods=["GET", "POST"])
+def query_runner():
+    selected = request.form.get("query")
+    rows = []
+    headers = []
+
+    if selected in QUERIES:
+        db = get_db()
+        cur = db.cursor()
+        cur.execute(QUERIES[selected]["sql"])
+        rows = cur.fetchall()
+        headers = [d[0] for d in cur.description]
+        db.close()
+
+    return render_template(
+        "queries.html",
+        queries=QUERIES,
+        selected=selected,
+        rows=rows,
+        headers=headers
+    )
+
+QUERIES = { # same as in queries.sql
+    "goals_per_minute_2025": {
+        "label": "Which player scored the most goals per minute (2025 season)?",
+        "sql": """
 SELECT
   player_id,
   first_name,
@@ -24,8 +55,12 @@ FROM (
 WHERE total_minutes > 0
 ORDER BY goals_per_minute DESC
 LIMIT 1;
+"""
+    },
 
--- List all players from universities in the NESCAC conference who played between 300 and 500 total minutes.
+    "nescac_minutes_300_500": {
+        "label": "Players from NESCAC universities with 300–500 total minutes",
+        "sql": """
 SELECT
   p.player_id,
   p.first_name,
@@ -41,8 +76,12 @@ GROUP BY p.player_id
 HAVING c.conference_name = 'NESCAC'
    AND total_minutes BETWEEN 300 AND 500
 ORDER BY total_minutes DESC;
+"""
+    },
 
--- Which players have scored with less than ten minutes left to play, more than once this season?
+    "late_goals_multiple": {
+        "label": "Players who scored more than once with <10 minutes remaining",
+        "sql": """
 SELECT
   p.player_id,
   p.first_name,
@@ -56,8 +95,12 @@ WHERE pl.event_type = 'GOAL'
 GROUP BY p.player_id
 HAVING late_goals > 1
 ORDER BY late_goals DESC;
+"""
+    },
 
--- Between all teams from the UAA conference and the NESCAC conference, which conference had more total shutouts against non-conference opponents?
+    "uaa_vs_nescac_shutouts": {
+        "label": "UAA vs NESCAC: total shutouts against non-conference opponents",
+        "sql": """
 WITH games_with_confs AS (
   SELECT
     g.game_id,
@@ -89,8 +132,12 @@ FROM shutouts
 WHERE conf IN ('UAA', 'NESCAC')
 GROUP BY conf
 ORDER BY total_shutouts_vs_nonconf DESC;
+"""
+    },
 
--- Which teams have more wins on an away field than on their home field?
+    "away_more_than_home": {
+        "label": "Teams with more away wins than home wins",
+        "sql": """
 WITH results AS (
   SELECT
     game_id,
@@ -127,8 +174,12 @@ LEFT JOIN home_wins hw ON hw.university_id = u.university_id
 LEFT JOIN away_wins aw ON aw.university_id = u.university_id
 WHERE COALESCE(aw.away_wins, 0) > COALESCE(hw.home_wins, 0)
 ORDER BY away_wins DESC;
+"""
+    },
 
--- Which player in each conference had the highest shot-on-goal percentage (shot-on-goal/total shots)?
+    "best_sog_pct_by_conference": {
+        "label": "Best shot-on-goal percentage player in each conference",
+        "sql": """
 WITH per_player AS (
   SELECT
     gs.player_id,
@@ -151,30 +202,24 @@ with_conf AS (
   WHERE shots > 0
 ),
 ranked AS (
-  SELECT
-    *,
-    ROW_NUMBER() OVER (PARTITION BY conference_name ORDER BY sog_pct DESC) AS rn
+  SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY conference_name ORDER BY sog_pct DESC) AS rn
   FROM with_conf
 )
 SELECT conference_name, player_id, first_name, last_name, university_id, sog_pct
 FROM ranked
 WHERE rn = 1
 ORDER BY conference_name;
+"""
+    },
 
--- List all games played at a given neutral-site location that was not a playoff game.
--- Which graduating player (senior or graduate student) has the most goal contributions?
--- NOT POSSIBLE WITH CURRENT SCHEMA
-
--- For all games played on October 30th after 7pm , list all players who started on either team and their individual stats.
--- NOT POSSIBLE WITH CURRENT SCHEMA
-
--- Find the average number of goals per game for each university.
+    "avg_goals_per_team": {
+        "label": "Average goals per game by university",
+        "sql": """
 WITH team_game_goals AS (
-  SELECT home_team_id AS university_id, home_score AS goals
-  FROM Game
+  SELECT home_team_id AS university_id, home_score AS goals FROM Game
   UNION ALL
-  SELECT away_team_id AS university_id, away_score AS goals
-  FROM Game
+  SELECT away_team_id AS university_id, away_score AS goals FROM Game
 )
 SELECT
   u.university_id,
@@ -184,8 +229,12 @@ FROM team_game_goals tgg
 JOIN University u ON u.university_id = tgg.university_id
 GROUP BY u.university_id
 ORDER BY avg_goals_per_game DESC;
+"""
+    },
 
--- Compute the shot conversion rate (goals/shots) by player in the Centennial Conference, sorted highest to lowest.
+    "centennial_conversion_rate": {
+        "label": "Shot conversion rate by player (Centennial Conference)",
+        "sql": """
 SELECT
   gs.player_id,
   gs.first_name,
@@ -201,8 +250,12 @@ WHERE c.conference_name = 'Centennial'
 GROUP BY gs.player_id
 HAVING SUM(gs.shots) > 0
 ORDER BY conversion_rate DESC;
+"""
+    },
 
--- List all games decided by a game-winning goal (GW) (margin of one goal) and who scored it.
+    "game_winning_goals": {
+        "label": "Games decided by a game-winning goal and who scored it",
+        "sql": """
 WITH one_goal_games AS (
   SELECT *
   FROM Game
@@ -231,8 +284,12 @@ JOIN goal_events ge
   ON g.game_id = ge.game_id AND ge.rn = 1
 JOIN Player p ON p.player_id = ge.player_id
 ORDER BY g.game_date;
+"""
+    },
 
--- Which team attempted the most corners on October 12th?
+    "most_corners_oct_12": {
+        "label": "Team with the most corners on October 12, 2025",
+        "sql": """
 SELECT
   u.university_id,
   u.name,
@@ -245,8 +302,12 @@ WHERE pl.event_type = 'CORNER'
 GROUP BY u.university_id
 ORDER BY corners DESC
 LIMIT 1;
+"""
+    },
 
--- Which players attempted penalty kicks, and what was their success rate?
+    "penalty_kick_success": {
+        "label": "Players who attempted penalty kicks and their success rate",
+        "sql": """
 SELECT
   p.player_id,
   p.first_name,
@@ -260,8 +321,12 @@ JOIN Player p ON p.player_id = pl.player_id
 WHERE pl.event_type IN ('PENALTY_KICK', 'PENALTY_GOAL')
 GROUP BY p.player_id
 ORDER BY pk_success_rate DESC;
+"""
+    },
 
--- Which conference had the most total goals scored (only count in-season games, no preseason/postseason)?
+    "conference_total_goals": {
+        "label": "Conference with the most total goals scored",
+        "sql": """
 WITH team_goals AS (
   SELECT home_team_id AS university_id, home_score AS goals FROM Game
   UNION ALL
@@ -275,8 +340,12 @@ JOIN University u ON u.university_id = tg.university_id
 JOIN Conference c ON c.conference_id = u.conference_id
 GROUP BY c.conference_name
 ORDER BY total_goals DESC;
+"""
+    },
 
--- Which teams were ranked in the top 25 at most once?
+    "ranked_once": {
+        "label": "Teams ranked in the Top 25 at most once",
+        "sql": """
 WITH ranked_names AS (
   SELECT rank_week, rank_1  AS team_name FROM Rankings WHERE rank_1  IS NOT NULL UNION ALL
   SELECT rank_week, rank_2  FROM Rankings WHERE rank_2  IS NOT NULL UNION ALL
@@ -313,8 +382,12 @@ SELECT team_name
 FROM rank_counts
 WHERE weeks_ranked <= 1
 ORDER BY team_name;
+"""
+    },
 
--- List all of the players who scored the latest goal in each game. 
+    "latest_goal_each_game": {
+        "label": "Player who scored the latest goal in each game",
+        "sql": """
 SELECT
   pl.game_id,
   p.player_id,
@@ -325,3 +398,10 @@ FROM Play pl
 JOIN Player p ON p.player_id = pl.player_id
 WHERE pl.event_type = 'GOAL'
 GROUP BY pl.game_id;
+"""
+    }
+}
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
