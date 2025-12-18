@@ -1,5 +1,6 @@
 PRAGMA foreign_keys = ON;
 
+-- CONFERENCE TABLE
 DROP TABLE IF EXISTS Conference;
 CREATE TABLE Conference (
     conference_id   INTEGER PRIMARY KEY,
@@ -7,6 +8,7 @@ CREATE TABLE Conference (
     seo             VARCHAR(100)
 );
 
+-- UNIVERSITY TABLE
 DROP TABLE IF EXISTS University;
 CREATE TABLE University (
     university_id  INTEGER PRIMARY KEY,
@@ -17,6 +19,7 @@ CREATE TABLE University (
         ON DELETE SET NULL
 );
 
+-- RANKINGS TABLE
 DROP TABLE IF EXISTS Rankings;
 CREATE TABLE Rankings (
     rank_week  INTEGER PRIMARY KEY,
@@ -47,6 +50,7 @@ CREATE TABLE Rankings (
     rank_25    VARCHAR(100)
 );
 
+-- GAME TABLE
 DROP TABLE IF EXISTS Game;
 CREATE TABLE Game (
     game_id       INTEGER PRIMARY KEY,
@@ -65,6 +69,8 @@ CREATE TABLE Game (
         ON DELETE CASCADE
 );
 
+
+-- PLAYER TABLE
 DROP TABLE IF EXISTS Player;
 CREATE TABLE Player (
     player_id     INTEGER PRIMARY KEY,
@@ -78,6 +84,7 @@ CREATE TABLE Player (
         ON DELETE CASCADE
 );
 
+-- GAMESTATS TABLE
 DROP TABLE IF EXISTS GameStats;
 CREATE TABLE GameStats (
     game_id         INTEGER NOT NULL,
@@ -116,6 +123,7 @@ CREATE TABLE GameStats (
 );
 
 
+-- VIEW FOR PLAYER DERIVED STATS, from GameStats
 DROP VIEW IF EXISTS PlayerDerivedStats;
 CREATE VIEW PlayerDerivedStats AS
 SELECT 
@@ -125,6 +133,7 @@ SELECT
     CASE WHEN shots_on_target > 0 THEN goals * 1.0 / shots_on_target END AS sog_pct
 FROM GameStats gs;
 
+-- VIEW FOR PLAYER SEASON STATS, from GameStats
 DROP VIEW IF EXISTS PlayerSeasonStats;
 CREATE VIEW PlayerSeasonStats AS
 SELECT
@@ -158,7 +167,7 @@ SELECT
 FROM GameStats gs
 GROUP BY gs.player_id;
 
-
+-- PLAY TABLE
 DROP TABLE IF EXISTS Play;
 CREATE TABLE Play (
     play_id      INTEGER PRIMARY KEY AUTOINCREMENT,
