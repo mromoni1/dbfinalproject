@@ -182,42 +182,6 @@ ORDER BY away_wins DESC;
 """
     },
 
-    "best_sog_pct_by_conference": {
-        "label": "Best shot-on-goal percentage player in each conference",
-        "sql": """
-WITH per_player AS (
-  SELECT
-    gs.player_id,
-    SUM(gs.shots) AS shots,
-    SUM(gs.shots_on_target) AS sog
-  FROM GameStats gs
-  GROUP BY gs.player_id
-),
-with_conf AS (
-  SELECT
-    c.conference_name,
-    plyr.first_name,
-    plyr.last_name,
-    p.*,
-    1.0 * sog / NULLIF(shots, 0) AS sog_pct
-  FROM per_player p
-  JOIN Player plyr ON p.player_id = plyr.player_id
-  JOIN University u ON u.university_id = plyr.university_id
-  JOIN Conference c ON c.conference_id = u.conference_id
-  WHERE shots > 0
-),
-ranked AS (
-  SELECT *,
-         ROW_NUMBER() OVER (PARTITION BY conference_name ORDER BY sog_pct DESC) AS rn
-  FROM with_conf
-)
-SELECT conference_name, player_id, first_name, last_name, sog_pct
-FROM ranked
-WHERE rn = 1
-ORDER BY conference_name;
-"""
-    },
-
     "avg_goals_per_team": {
         "label": "Average goals per game by university",
         "sql": """
@@ -236,27 +200,6 @@ GROUP BY u.university_id
 ORDER BY avg_goals_per_game DESC;
 """
     },
-
-    "centennial_conversion_rate": {
-        "label": "Shot conversion rate by player (Centennial Conference)",
-        "sql": """
-SELECT
-  gs.player_id,
-  u.name AS university_name,
-  SUM(gs.goals) AS goals,
-  SUM(gs.shots) AS shots,
-  1.0 * SUM(gs.goals) / NULLIF(SUM(gs.shots), 0) AS conversion_rate
-FROM GameStats gs
-JOIN Player p ON gs.player_id = p.player_id
-JOIN University u ON u.university_id = p.university_id
-JOIN Conference c ON c.conference_id = u.conference_id
-WHERE c.conference_name = 'Centennial'
-GROUP BY gs.player_id
-HAVING SUM(gs.shots) > 0
-ORDER BY conversion_rate DESC;
-"""
-    },
-
     "game_winning_goals": {
         "label": "Games decided by a game-winning goal and who scored it",
         "sql": """
@@ -308,26 +251,6 @@ ORDER BY corners DESC
 LIMIT 1;
 """
     },
-
-    "penalty_kick_success": {
-        "label": "Players who attempted penalty kicks and their success rate",
-        "sql": """
-SELECT
-  p.player_id,
-  p.first_name,
-  p.last_name,
-  COUNT(*) AS pk_attempts,
-  SUM(CASE WHEN pl.event_type = 'GOAL' THEN 1 ELSE 0 END) AS pk_goals,
-  1.0 * SUM(CASE WHEN pl.event_type = 'GOAL' THEN 1 ELSE 0 END)
-      / COUNT(*) AS pk_success_rate
-FROM Play pl
-JOIN Player p ON p.player_id = pl.player_id
-WHERE pl.event_type IN ('PENALTY_KICK', 'PENALTY_GOAL')
-GROUP BY p.player_id
-ORDER BY pk_success_rate DESC;
-"""
-    },
-
     "conference_total_goals": {
         "label": "Conference with the most total goals scored",
         "sql": """
