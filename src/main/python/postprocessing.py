@@ -5,6 +5,25 @@ from shutil import copyfile
 
 PLAYER_CSV = "../output/Player.csv"
 PLAY_CSV = "../output/Play.csv"
+GAMESTATS_CSV = "../output/GameStats.csv"
+
+FINAL_GAMESTATS_FIELDS = [
+    "game_id",
+    "player_id",
+    "played",
+    "started",
+    "shots",
+    "shots_on_target",
+    "goals",
+    "assists",
+    "minutes",
+    "pk_attempt",
+    "pk_made",
+    "gw",
+    "yc",
+    "rc",
+]
+
 
 
 def normalize_name(name: str):
@@ -80,6 +99,41 @@ def normalize_play_csv():
 
     print(f"Normalized Play.csv ({len(rows)} rows)")
 
+def postprocess_gamestats_csv():
+    backup = GAMESTATS_CSV + ".bak"
+    copyfile(GAMESTATS_CSV, backup)
+    print(f"Backup created: {backup}")
+
+    cleaned_rows = []
+
+    with open(GAMESTATS_CSV, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+
+        for r in reader:
+            cleaned_rows.append({
+                "game_id": r["game_id"],
+                "player_id": r["player_id"],
+                "played": r["played"],
+                "started": r["started"],
+                "shots": r["shots"],
+                "shots_on_target": r["shots_on_target"],
+                "goals": r["goals"],
+                "assists": r["assists"],
+                "minutes": r["minutes"],
+                "pk_attempt": r["pk_attempt"],
+                "pk_made": r["pk_made"],
+                "gw": r["gw"],
+                "yc": r["yc"],
+                "rc": r["rc"],
+            })
+
+    with open(GAMESTATS_CSV, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FINAL_GAMESTATS_FIELDS)
+        writer.writeheader()
+        writer.writerows(cleaned_rows)
+
+    print(f"Normalized GameStats.csv ({len(cleaned_rows)} rows)")
+
 
 # ==========================
 # Main
@@ -92,5 +146,6 @@ if __name__ == "__main__":
 
     normalize_player_csv()
     normalize_play_csv()
+    postprocess_gamestats_csv()
 
     print("✅ CSV normalization complete.")
