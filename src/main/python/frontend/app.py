@@ -34,7 +34,7 @@ QUERIES = { # same as in queries.sql
         "sql": """
 SELECT
   player_id,
-  first_name, 
+  first_name,
   last_name,
   total_goals,
   total_minutes,
@@ -42,18 +42,24 @@ SELECT
 FROM (
   SELECT
     gs.player_id,
-    p.first_name, 
+    p.first_name,
     p.last_name,
-    SUM(gs.goals) AS total_goals,
+    SUM(gs.goals)   AS total_goals,
     SUM(gs.minutes) AS total_minutes
   FROM GameStats gs
-  JOIN Game g ON g.game_id = gs.game_id
-  JOIN Player p on gs.player_id = p.player_id
-  GROUP BY gs.player_id
+  JOIN Game g
+    ON g.game_id = gs.game_id
+  JOIN Player p
+    ON gs.player_id = p.player_id
+  GROUP BY
+    gs.player_id,
+    p.first_name,
+    p.last_name
 )
 WHERE total_minutes > 0
 ORDER BY goals_per_minute DESC
 LIMIT 1;
+
 """
     },
 
