@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>D3 Women's Soccer: Query Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>D3 Women's Soccer: Query Explorer</h1>
+        <h2>By Megha Salvi and Maria Romo-Nichols</h2>
+
+        <b1>Select a query from the dropdown below to learn more about the 2025 NCAA DIII Women's Soccer Season!</b1>
+        <b2>Data Source: NCAA.com, accessed via unofficial, public NCAA API by Henry G. (https://github.com/henrygd/ncaa-api) </b2>
+
+        <form method="POST">
+            <select name="query">
+                {% for key, q in queries.items() %}
+                <option value="{{ key }}" {% if key==selected %}selected{% endif %}>
+                    {{ q.label }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Run Query</button>
+        </form>
+
+        {% if rows %}
+        <table>
+            <thead>
+                <tr>
+                    {% for h in headers %}
+                    <th>{{ h }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% for col in row %}
+                    <td>{{ col }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+
+</html>
