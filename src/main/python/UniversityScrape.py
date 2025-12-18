@@ -73,21 +73,23 @@ def extract_team(team: dict) -> Optional[dict]:
     if not isinstance(team, dict):
         return None
 
+    team_id = team.get("teamId")
     names = team.get("names") or {}
-    char6 = names.get("char6")
+
     full = names.get("full") or names.get("short")
 
-    if not char6 or not full:
+    if not team_id or not full:
         return None
 
     conf_name, conf_seo = pick_primary_conference(team.get("conferences", []))
 
     return {
-        "university_id": char6,   # scoreboard char6
+        "university_id": int(team_id),   # ✅ INTEGER TEAM ID
         "name": full,
         "conference_name": conf_name,
         "conference_seo": conf_seo,
     }
+
 
 
 def write_conferences_csv(conferences: Dict[str, dict], filename="conferences.csv"):
@@ -99,7 +101,7 @@ def write_conferences_csv(conferences: Dict[str, dict], filename="conferences.cs
             w.writerow(conf)
 
 
-def write_universities_csv(universities: Dict[str, dict], filename="universities.csv"):
+def write_universities_csv(universities: Dict[int, dict], filename="universities.csv"):
     fieldnames = ["university_id", "name", "conference_id"]
     with open(filename, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
