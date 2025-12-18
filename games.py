@@ -1,10 +1,11 @@
 import csv
 import os
 import json
+import time 
 from datetime import datetime
 from api import ncaa_get   # ← SAFE, one direction only
 
-GAME_CSV_FILE = "games.csv"
+GAME_CSV_FILE = "newgames.csv"
 GAME_CSV_FIELDS = [
     "game_id",
     "home_team_id",
@@ -58,7 +59,7 @@ def write_game_ids():
             for g in scoreboard.get("games", []):
                 game = g.get("game", {})
 
-                url = game.get("url")  # "/game/6476739"
+                url = game.get("url")  
                 if not url:
                     continue
 
@@ -99,8 +100,8 @@ def parse_single_game_for_csv(game_data):
 
     return {
         "game_id": int(contest["id"]),
-        "home_team_id": str(home["name6Char"]),
-        "away_team_id": str(away["name6Char"]),
+        "home_team_id": int(home["teamId"]),
+        "away_team_id": int(away["teamId"]),
         "home_score": home_score,
         "away_score": away_score,
         "location": contest.get("location"),
@@ -121,19 +122,32 @@ def games_to_csv(games, filename=GAME_CSV_FILE):
         for game in games:
             writer.writerow(game)
 
-def populate_games(): 
-    game_rows = []
+def populate_games():
     with open("game_ids.json", "r") as f:
         game_ids = json.load(f)
 
-    for gid in game_ids:
+    rows = []
+    for i, gid in enumerate(game_ids, 1):
         try:
-            game_data = ncaa_get_game(gid)
-            row = parse_single_game_for_csv(game_data)
-            game_rows.append(row)
-            print(f"Fetched game {gid}")
-        except Exception as e:
-            print(f"Skipping game {gid}: {e}")
+            print(f"[{i}/{len(game_ids)}] Fetching game {gid}")
 
-    games_to_csv(game_rows)
-    print(f"Wrote {len(game_rows)} games to games.csv")
+            game_data = ncaa_get_game(gid)
+
+            if game_data['contests'][0].get("sportCode") != "WSO":
+                continue
+
+            if game_data['contests'][0].get("division") != 3:
+                print(f"  → not D3")
+                continue
+
+            row = parse_single_game_for_csv(game_data)
+            rows.append(row)
+
+            print(f"  → saved")
+
+        except Exception as e:
+            print(f"  → skipping: {type(e).__name__}")
+
+        time.sleep(0.15)
+
+    games_to_csv(rows, filename=GAME_CSV_FILE)
