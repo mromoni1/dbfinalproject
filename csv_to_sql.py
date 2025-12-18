@@ -6,17 +6,15 @@ import re
 DB_FILE = "D3WomensSoccer.db"
 SCHEMA_FILE = "D3WomensSoccerSchema.sql"
 
-# CSV → TABLE mapping
 CSV_TABLES = {
     "src/main/output/Conference.csv": "Conference",
     "src/main/output/University.csv": "University",
     "src/main/output/Rankings.csv": "Rankings",
     "src/main/output/Game.csv": "Game",
     "src/main/output/GameStats.csv": "GameStats",
-    # add others later (Player, GameStats, Play, etc.)
+    "src/main/output/Play.csv": "Play",
 }
 
-# Enforce creation order to avoid sqlite3.IntegrityError: FOREIGN KEY constraint failed
 CREATION_ORDER = [
     "Conference",
     "University",
@@ -24,37 +22,18 @@ CREATION_ORDER = [
     "Game",
     "GameStats",
     "Player",
+    "Play",
 ]
 
-def populate_player_from_gamestats(conn):
-    cur = conn.cursor()
-    cur.execute("""
-        INSERT OR IGNORE INTO Player (
-            player_id,
-            first_name,
-            last_name,
-            class_grade,
-            position,
-            university_id
-        )
-        SELECT DISTINCT
-            player_id,
-            first_name,
-            last_name,
-            NULL,
-            position,
-            university_id
-        FROM GameStats
-    """)
-    conn.commit()
-    print("Inserted Player rows from GameStats")
 
+# Connect to db
 
 def connect():
     conn = sqlite3.connect(DB_FILE)
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn
 
+# Schema execution
 
 def execute_schema(conn):
     with open(SCHEMA_FILE, "r", encoding="utf-8") as f:
@@ -81,7 +60,6 @@ def execute_schema(conn):
     print("Dropping existing objects...")
     for d in drops:
         cur.execute(d)
-
     conn.commit()
 
     print("Re-enabling foreign keys...")
@@ -95,9 +73,63 @@ def execute_schema(conn):
 
     conn.commit()
 
+# Helpers to populate Player from GameStats and Play
+
+def populate_player_from_gamestats(conn):
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT OR IGNORE INTO Player (
+            player_id,
+            first_name,
+            last_name,
+            class_grade,
+            position,
+            university_id
+        )
+        SELECT DISTINCT
+            player_id,
+            first_name,
+            last_name,
+            NULL,
+            position,
+            university_id
+        FROM GameStats
+        WHERE player_id IS NOT NULL
+    """)
+    conn.commit()
+    print("Inserted Player rows from GameStats")
 
 
-import sqlite3
+def populate_player_from_play(conn):
+    """
+    Inserts players who appear only in Play (e.g. substitutions with no stats).
+    Does NOT duplicate existing players because of INSERT OR IGNORE.
+    """
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT OR IGNORE INTO Player (
+            player_id,
+            first_name,
+            last_name,
+            class_grade,
+            position,
+            university_id
+        )
+        SELECT DISTINCT
+            p.player_id,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL
+        FROM Play p
+        WHERE p.player_id IS NOT NULL
+    """)
+    conn.commit()
+    print("Inserted missing Players from Play")
+
+
+# CSV insertion
 
 def insert_csv(conn, csv_file, table):
     with open(csv_file, newline="", encoding="utf-8") as f:
@@ -116,13 +148,12 @@ def insert_csv(conn, csv_file, table):
 
         inserted = 0
         skipped = 0
+
         for row in reader:
             try:
-                # Enforce D3-vs-D3 only
                 if table == "Game":
                     home = int(row["home_team_id"])
                     away = int(row["away_team_id"])
-
                     if home not in valid_universities or away not in valid_universities:
                         skipped += 1
                         continue
@@ -131,9 +162,8 @@ def insert_csv(conn, csv_file, table):
                 cur.execute(sql, values)
                 inserted += 1
 
-            except sqlite3.IntegrityError:
+            except sqlite3.IntegrityError as e:
                 skipped += 1
-                continue
 
         conn.commit()
 
@@ -141,24 +171,25 @@ def insert_csv(conn, csv_file, table):
         if skipped:
             print(f"Skipped {skipped} invalid rows in {table}")
 
-
-
-
+#
 def main():
     conn = connect()
     execute_schema(conn)
 
+    # Insert all tables EXCEPT Play
     for csv_file, table in CSV_TABLES.items():
-        if os.path.exists(csv_file):
+        if table != "Play" and os.path.exists(csv_file):
             insert_csv(conn, csv_file, table)
-        else:
-            print(f"Skipping missing file: {csv_file}")
 
+    # Populate Player from both sources
     populate_player_from_gamestats(conn)
+    populate_player_from_play(conn)
+
+    # Insert Play last (FKs now satisfied)
+    insert_csv(conn, "src/main/output/Play.csv", "Play")
 
     conn.close()
     print("Database build complete.")
-
 
 if __name__ == "__main__":
     main()

@@ -1,30 +1,29 @@
 import csv
 
-INPUT_1 = "games_augsept.csv"
-INPUT_2 = "games_octnov.csv"
-OUTPUT = "games.csv"
-
+INPUT_1 = "../output/AugSeptPlay.csv"
+INPUT_2 = "../output/OctNovPlay.csv"
+OUTPUT = "../output/Play.csv"
 
 def merge_csvs():
+    next_play_id = 1
+
     with open(OUTPUT, "w", newline="", encoding="utf-8") as out:
         writer = None
 
-        for i, infile in enumerate([INPUT_1, INPUT_2]):
+        for infile in [INPUT_1, INPUT_2]:
             with open(infile, newline="", encoding="utf-8") as f:
-                reader = csv.reader(f)
-                header = next(reader)
+                reader = csv.DictReader(f)
 
-                if i == 0:
-                    # Write header only once
-                    writer = csv.writer(out)
-                    writer.writerow(header)
+                if writer is None:
+                    writer = csv.DictWriter(out, fieldnames=reader.fieldnames)
+                    writer.writeheader()
 
-                # Write data rows
                 for row in reader:
+                    row["play_id"] = next_play_id
+                    next_play_id += 1
                     writer.writerow(row)
 
-    print(f"Merged CSV written to {OUTPUT}")
-
+    print(f"Merged CSV written to {OUTPUT} (play_id reindexed)")
 
 if __name__ == "__main__":
     merge_csvs()
