@@ -163,12 +163,12 @@ def parse_game_plays(pbp: dict,
                 time_of_play = parse_time(clock)
 
                 # Explicit exclusions
-                if event_type in {"KICKOFF"}:
-                    continue
+                # if event_type in {"KICKOFF"}:
+                #     continue
 
                 # Drop missing / zero-time events
-                if not time_of_play or time_of_play == "00:00:00":
-                    continue
+                # if not time_of_play or time_of_play == "00:00:00":
+                #     continue
 
                 rows.append({
                     "play_id": play_id,
