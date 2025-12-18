@@ -1,0 +1,412 @@
+university_id,name,conference_id
+50925,Brooklyn College,51
+51134,Alfred State College,43
+51283,Houghton University,24
+51317,Lehman College,51
+51510,Sarah Lawrence College,18
+51536,Southern Virginia University,37
+51562,St. Joseph's University NY (Brooklyn),18
+51572,State University of New York at Canton,34
+51726,University of Valley Forge,38
+51751,York College (New York),51
+51794,Pennsylvania College of Technology,38
+51826,Illinois Institute of Technology,29
+52525,Belhaven University,4
+52802,Berea College,7
+55098,California Lutheran University,8
+55106,"University of California, Santa Cruz",45
+55107,Calvin University,22
+55110,Capital University,47
+55111,Carleton College,12
+55112,Carnegie Mellon University,40
+55113,Carroll University (Wisconsin),39
+55114,Carthage College,39
+55115,Case Western Reserve University,40
+55116,Vermont State University Castleton,16
+55117,Catholic University,26
+55118,Centenary College (Louisiana),36
+55119,Central College (Iowa),13
+55124,Centre College,9
+55126,Chapman University,8
+55127,University of Chicago,40
+55128,Christopher Newport University,45
+55131,Claremont McKenna-Harvey Mudd-Scripps Colleges,8
+55133,Clark University (Massachusetts),15
+55134,Clarkson University,23
+55138,Coe College,13
+55143,Concordia University Chicago,29
+55145,"Concordia College, Moorhead",12
+55146,Connecticut College,53
+55147,Cornell College,44
+55148,State University of New York at Cortland,34
+55153,Curry College,17
+55158,Colby-Sawyer College,20
+55161,Colby College,53
+55162,DePauw University,48
+55164,Delaware Valley University,35
+55167,Denison University,48
+55170,Dickinson College,32
+55172,Drew University,26
+55177,Earlham College,7
+55182,Eastern Connecticut State University,16
+55185,Eastern Mennonite University,30
+55192,Elizabethtown College,26
+55193,Elmhurst University,39
+55194,Elmira College,24
+55195,Emerson College,15
+55196,Emmanuel College (Massachusetts),20
+55198,Emory University,40
+55199,Eureka College,41
+55202,"Fairleigh Dickinson University, Florham",35
+55206,Fitchburg State University,21
+55214,Framingham State University,21
+55215,Franklin & Marshall College,32
+55217,The State University of New York at Fredonia,34
+55222,State University of New York at Geneseo,24
+55229,Gettysburg College,32
+55230,Rowan University,33
+55234,Greensboro College,37
+55235,Grinnell College,44
+55236,Grove City College,27
+55237,Gustavus Adolphus College,12
+55238,Hamilton College,53
+55239,Hamline University,12
+55240,Hardin-Simmons University,46
+55241,University of Hartford,17
+55242,Hartwick College,24
+55244,Haverford College,32
+55246,Heidelberg University,47
+55247,Hiram College,27
+55250,Hope College,22
+55252,Hollins University,30
+55258,Benedictine University (Illinois),29
+55259,Illinois College,44
+55261,Illinois Wesleyan University,39
+55263,Immaculata University,11
+55272,Ithaca College,23
+55277,New Jersey City University,33
+55278,John Carroll University,48
+55279,John Jay College of Criminal Justice,51
+55280,Johns Hopkins University,32
+55281,Vermont State University-Johnson,19
+55282,Juniata College,26
+55283,Kalamazoo College,22
+55285,Kean University,33
+55286,Keene State College,16
+55290,Kenyon College,48
+55291,King's College (Pennsylvania),35
+55292,Knox College,44
+55295,University of La Verne,8
+55297,Lake Forest College,44
+55299,Lawrence University,44
+55301,Lebanon Valley College,35
+55311,Loras College,13
+55319,Luther College,13
+55320,Lycoming College,26
+55321,University of Lynchburg,30
+55322,Macalester College,12
+55324,Maine Maritime Academy,19
+55325,"University of Maine, Farmington",19
+55328,Manhattanville University,18
+55331,Marietta College,47
+55335,Mary Baldwin University,37
+55336,University of Mary Washington,45
+55339,Marymount University (Virginia),11
+55341,Maryville College (Tennessee),4
+55342,Marywood University,11
+55343,Massachusetts Institute of Technology,15
+55344,Massachusetts Maritime Academy,21
+55346,University of Massachusetts Boston,16
+55348,Medgar Evers College,51
+55353,Meredith College,37
+55355,Messiah University,31
+55356,Methodist University,37
+55364,Middlebury College,53
+55366,Millikin University,39
+55367,Millsaps College,9
+55381,Adrian College,22
+55389,Albion College,22
+55390,Albright College,31
+55392,Alfred University,24
+55393,Allegheny College,27
+55394,DeSales University,35
+55395,Alma College,22
+55398,Amherst College,53
+55400,Anna Maria College,21
+55411,Augsburg University,12
+55412,Augustana College (Illinois),39
+55414,Aurora University,29
+55416,Averett University,30
+55417,Babson College,15
+55418,Baldwin Wallace University,47
+55422,Bates College,53
+55425,Beloit College,44
+55428,Bethany College (West Virginia),27
+55429,Bethel University (Minnesota),12
+55431,Blackburn College,41
+55436,Bowdoin College,53
+55438,Brandeis University,40
+55440,Bridgewater College (Virginia),30
+55441,Bridgewater State University,21
+55443,State University of New York at Brockport,24
+55446,Bryn Mawr College,32
+55448,Buena Vista University,13
+55449,"Buffalo State, State University of New York",34
+55454,Western New England University,17
+55455,Westfield State University,21
+55456,Wheaton College (Illinois),39
+55457,Wheaton College (Massachusetts),15
+55458,Whitman College,1
+55459,Whittier College,8
+55460,Widener University,31
+55461,Wilkes University,26
+55462,Willamette University,1
+55464,William Paterson University of New Jersey,33
+55465,Williams College,53
+55468,University of Wisconsin-Eau Claire,42
+55470,University of Wisconsin-La Crosse,42
+55473,University of Wisconsin-Oshkosh,42
+55475,University of Wisconsin-Platteville,42
+55476,University of Wisconsin-River Falls,42
+55477,University of Wisconsin-Stevens Point,42
+55478,University of Wisconsin-Stout,42
+55479,University of Wisconsin-Superior,28
+55480,University of Wisconsin-Whitewater,42
+55481,Wittenberg University,48
+55482,The College of Wooster,48
+55483,Worcester Polytechnic Institute,15
+55484,Worcester State University,21
+55489,Yeshiva University,18
+55490,York College (Pennsylvania),31
+55494,Alvernia University,31
+55495,Anderson University (Indiana),7
+55496,Austin College,36
+55498,Bard College,23
+55499,Arcadia University,35
+55500,Berry College,9
+55502,Bluffton University,7
+55515,Concordia University Wisconsin,29
+55516,University of Dallas,36
+55521,East Texas Baptist University,46
+55523,Edgewood University,29
+55531,George Fox University,1
+55534,Gordon College,17
+55536,Greenville University,41
+55537,Guilford College,30
+55538,Hanover College,7
+55540,Hendrix College,36
+55542,Huntingdon College,4
+55543,Husson University,19
+55547,LaGrange College,4
+55548,La Roche University,43
+55549,Lakeland University,29
+55554,Linfield University,1
+55556,Manchester University,7
+55557,Maranatha Baptist University,25
+55558,Marian University (Wisconsin),29
+55560,University of Mary Hardin-Baylor,46
+55562,"University of Minnesota, Morris",28
+55566,Neumann University,11
+55567,University of New England,17
+55575,Pacific Lutheran University,1
+55576,Cairn University,38
+55577,"University of Pittsburgh, Bradford",43
+55581,Dominican University (Illinois),29
+55583,"St. Joseph's University, New York L.I.",18
+55591,Texas Lutheran University,36
+55595,Waynesburg University,27
+55598,Westminster College (Missouri),41
+55599,Westminster College (Pennsylvania),27
+55600,Whitworth University,1
+55602,Wilmington College (Ohio),47
+55604,Goucher College,26
+55605,Mount Saint Mary College (New York),18
+55606,Monmouth College (Illinois),44
+55609,Montclair State University,33
+55610,Moravian University,26
+55612,Mount Holyoke College,15
+55614,University of Mount Saint Vincent,18
+55615,University of Mount Union,47
+55616,Muhlenberg College,32
+55618,Muskingum University,47
+55624,Nazareth University,24
+55625,Nebraska Wesleyan University,13
+55630,New England College,20
+55638,State University of New York at New Paltz,34
+55640,State University of New York Maritime College,18
+55641,New York University,40
+55642,The City College of New York,51
+55646,Nichols College,17
+55647,Massachusetts College of Liberal Arts,21
+55650,North Carolina Wesleyan University,37
+55651,North Central College,39
+55654,North Park University,39
+55669,Norwich University,20
+55672,Oberlin College,48
+55673,Occidental College,8
+55674,Ohio Northern University,47
+55677,Ohio Wesleyan University,48
+55681,State University of New York at Old Westbury,18
+55682,The University of Olivet,22
+55683,State University of New York at Oneonta,34
+55687,State University of New York at Oswego,34
+55688,Otterbein University,47
+55689,Elms College,20
+55693,"Pennsylvania State Univ. Erie, the Behrend College",43
+55697,Pfeiffer University,37
+55702,Plattsburgh State University of New York,34
+55703,Plymouth State University,16
+55704,Pomona-Pitzer Colleges,8
+55707,State University of New York at Potsdam,34
+55710,Principia College,41
+55712,University of Puget Sound,1
+55718,Ramapo College,33
+55720,Randolph College,30
+55721,University of Redlands,8
+55723,Regis College (Massachusetts),20
+55724,Rensselaer Polytechnic Institute,23
+55725,Rhode Island College,16
+55727,Rhodes College,9
+55731,Ripon College,44
+55732,Roanoke College,30
+55734,Rochester Institute of Technology,23
+55735,University of Rochester,40
+55736,Rockford University,29
+55737,Roger Williams University,17
+55739,Rose-Hulman Institute of Technology,7
+55741,"Rutgers, The State Univ. of New Jersey, Camden",33
+55742,"Rutgers, The State Univ. of New Jersey, Newark",33
+55748,College of Saint Benedict,12
+55749,St. Catherine University,12
+55752,St. John Fisher University,24
+55755,Saint Joseph's College (Maine),20
+55757,St. Lawrence University,23
+55761,St. Mary's College of Maryland,38
+55762,Saint Mary's University of Minnesota,12
+55764,St. Norbert College,29
+55765,St. Olaf College,12
+55767,The College of St. Scholastica,12
+55769,Salem State University,21
+55770,Salisbury University,45
+55771,Salve Regina University,15
+55780,University of Scranton,26
+55783,Shenandoah University,30
+55786,Simmons University,20
+55787,Simpson College,13
+55788,Skidmore College,23
+55790,Smith College,15
+55798,University of the South,9
+55801,"University of Massachusetts, Dartmouth",16
+55806,University of Southern Maine,16
+55814,Springfield College,15
+55819,Stevens Institute of Technology,35
+55820,Stockton University,33
+55823,Suffolk University,17
+55824,Susquehanna University,26
+55825,Swarthmore College,32
+55826,Sweet Briar College,30
+55842,Thiel College,27
+55845,The College of New Jersey,33
+55846,Trinity College (Connecticut),53
+55847,Trinity University (Texas),9
+55849,Tufts University,53
+55852,U.S. Coast Guard Academy,15
+55855,Union College (New York),23
+55857,Ursinus College,32
+55860,Utica University,24
+55864,Vassar College,23
+55870,Virginia Wesleyan University,30
+55874,Wartburg College,13
+55875,Washington and Jefferson College,27
+55876,Washington and Lee University,30
+55877,Washington College (Maryland),32
+55879,Washington University in St. Louis,40
+55882,Webster University,41
+55883,Wellesley College,15
+55885,Wentworth Institute of Technology,17
+55887,Wesleyan University (Connecticut),53
+55893,Western Connecticut State University,16
+55896,McDaniel College,32
+55897,Misericordia University,35
+55898,William Peace University,37
+55899,Rivier University,20
+55902,Milwaukee School of Engineering,29
+55907,Piedmont University,4
+55908,Stevenson University,31
+55909,Lewis & Clark College,1
+55910,Johnson & Wales University (Providence),17
+55911,University of the Ozarks (Arkansas),36
+55914,Spalding University,41
+55915,Trinity Washington University,25
+55918,Lesley University,19
+55919,Concordia University Texas,36
+55921,"Penn State University, Altoona",43
+55926,Farmingdale State College,18
+55931,Transylvania University,7
+55935,"Purchase College, State University of New York",18
+55936,University of Northwestern-St. Paul,28
+55938,Mount Mary University,2
+55940,Crown College (Minnesota),28
+55941,Mount Aloysius College,43
+55942,Trine University,22
+55943,Bethany Lutheran College,28
+55944,North Central University,28
+55945,University of Maine at Presque Isle,19
+55946,Mitchell College,20
+55947,Salem College (North Carolina),37
+55948,Penn State Berks College,38
+55950,Keystone College,38
+55958,Saint Vincent College,27
+55959,Vermont State University Lyndon,19
+55960,State University of New York at Morrisville,34
+55961,Franciscan University of Steubenville,27
+55962,William Smith College,23
+55964,Penn State Harrisburg,38
+55965,State University of New York at Cobleskill,19
+55966,Geneva College,27
+55967,Lancaster Bible College,38
+55971,Brevard College,37
+55974,Covenant College,4
+55975,"Penn State University, Abington",38
+55997,Franklin College,7
+56003,Oglethorpe University,9
+56005,Howard Payne University,46
+56008,Pacific University (Oregon),1
+56010,Thomas College,19
+56011,Albertus Magnus College,20
+56015,Hilbert College,43
+56016,Hood College,31
+56017,Lasell University,20
+56018,LeTourneau University,36
+56019,McMurry University,36
+56020,Mount St. Joseph University,7
+56022,Martin Luther College,28
+56023,Notre Dame of Maryland University,38
+56024,University of Saint Joseph (Connecticut),20
+56025,Saint Mary's College (Indiana),22
+56028,Southwestern University (Texas),9
+56031,Wisconsin Lutheran College,29
+56035,Eastern University,31
+56036,Endicott College,17
+56043,State University of New York Polytechnic Institute,24
+56045,Saint Elizabeth University,11
+56049,Chatham University,27
+56050,Russell Sage College,24
+56053,Agnes Scott College,4
+56059,"University of Pittsburgh, Greensburg",43
+56060,Gwynedd Mercy University,11
+56064,Centenary University (New Jersey),11
+56065,Wilson College,38
+56068,Wesleyan College (Georgia),4
+56069,Cedar Crest College,38
+58203,Dean College,20
+1371463,Mississippi University for Women,41
+1371475,California Institute of Technology,8
+1371476,State University of New York at Delhi,19
+1371497,Pratt Institute,11
+1371716,University of St. Thomas (Texas),36
+1387951,Warren Wilson College,45
+1388099,Asbury University,4
+1388099,Asbury University,4
+1388415,U.S. Merchant Marine Academy,18
+1388463,Lyon College,41
