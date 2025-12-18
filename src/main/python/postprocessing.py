@@ -7,10 +7,6 @@ PLAYER_CSV = "../output/Player.csv"
 PLAY_CSV = "../output/Play.csv"
 
 
-# ==========================
-# Normalization helpers
-# ==========================
-
 def normalize_name(name: str):
     if not name:
         return name
@@ -39,11 +35,6 @@ def normalize_position(pos: str):
     return pos.strip().upper()
 
 
-
-# ==========================
-# Player.csv normalization
-# ==========================
-
 def normalize_player_csv():
     backup = PLAYER_CSV + ".bak"
     copyfile(PLAYER_CSV, backup)
@@ -67,11 +58,6 @@ def normalize_player_csv():
 
     print(f"Normalized Player.csv ({len(rows)} rows)")
 
-
-
-# ==========================
-# Play.csv normalization
-# ==========================
 
 def normalize_play_csv():
     backup = PLAY_CSV + ".bak"
