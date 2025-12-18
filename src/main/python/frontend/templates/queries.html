@@ -26,26 +26,57 @@
         </form>
 
         {% if rows %}
-        <table>
-            <thead>
-                <tr>
-                    {% for h in headers %}
-                    <th>{{ h }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in rows %}
-                <tr>
-                    {% for col in row %}
-                    <td>{{ col }}</td>
-                    {% endfor %}
-                </tr>
+        <table id="resultsTable">
+        <thead>
+            <tr>
+            {% for h in headers %}
+                <th onclick="sortTable({{ loop.index0 }})">
+                {{ h }}
+                <span class="sort-indicator">⇅</span>
+                </th>
+            {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for col in row %}
+                <td>{{ col }}</td>
                 {% endfor %}
-            </tbody>
+            </tr>
+            {% endfor %}
+        </tbody>
         </table>
         {% endif %}
-    </div>
-</body>
+        <script>
+        let sortDirections = {};
 
+        function sortTable(colIndex) {
+            const table = document.getElementById("resultsTable");
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.rows);
+            const direction = sortDirections[colIndex] === "asc" ? "desc" : "asc";
+            sortDirections[colIndex] = direction;
+
+            rows.sort((a, b) => {
+                let A = a.cells[colIndex].innerText.trim();
+                let B = b.cells[colIndex].innerText.trim();
+
+                let numA = parseFloat(A);
+                let numB = parseFloat(B);
+
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return direction === "asc" ? numA - numB : numB - numA;
+                }
+
+                return direction === "asc"
+                ? A.localeCompare(B)
+                : B.localeCompare(A);
+            });
+
+            // put sorted rows back into the table
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        </script>
+</body>
 </html>
