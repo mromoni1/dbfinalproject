@@ -11,14 +11,10 @@ GAMESTATS_CSV = "gamestats.csv"
 GAMESTATS_FIELDS = [
     "game_id",
     "player_id",
-
-    # player metadata (for players.py)
     "first_name",
     "last_name",
     "position",
     "university_id",
-
-    # per-game stats
     "played",
     "started",
     "shots",
@@ -33,8 +29,9 @@ GAMESTATS_FIELDS = [
     "rc",
 ]
 
+
 def ncaa_get_gamestats(game_id):
-    return ncaa_get(f"/game/{game_id}")["boxscore"]
+    return ncaa_get(f"/game/{game_id}/boxscore")
 
 def to_int(val, default=0):
     try:
@@ -42,21 +39,11 @@ def to_int(val, default=0):
     except (TypeError, ValueError):
         return default
 
-def gamestats_to_csv(rows, filename=GAMESTATS_CSV):
-    file_exists = os.path.isfile(filename)
-
-    with open(filename, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=GAMESTATS_FIELDS)
-
-        if not file_exists:
-            writer.writeheader()
-
-        for row in rows:
-            writer.writerow(row)
 
 def make_player_id(team_id, first, last):
     key = f"{team_id}:{first}:{last}".encode("utf-8")
     return int(hashlib.md5(key).hexdigest()[:8], 16)
+
 
 def parse_boxscore_to_gamestats(boxscore_json):
     game_id = int(boxscore_json["contestId"])
@@ -68,25 +55,18 @@ def parse_boxscore_to_gamestats(boxscore_json):
         for p in team.get("playerStats", []):
             first = p.get("firstName", "").strip()
             last = p.get("lastName", "").strip()
-            position = p.get("position")
 
-            player_id = make_player_id(university_id, first, last)
-
-            penalties = p.get("penalties", {})
-            goal_types = p.get("goalTypes", {})
+            penalties = p.get("penalties", {}) or {}
+            goal_types = p.get("goalTypes", {}) or {}
             minutes = p.get("minutesPlayed")
 
-            row = {
+            rows.append({
                 "game_id": game_id,
-                "player_id": player_id,
-
-                # player metadata
+                "player_id": make_player_id(university_id, first, last),
                 "first_name": first,
                 "last_name": last,
-                "position": position,
+                "position": p.get("position"),
                 "university_id": university_id,
-
-                # stats
                 "played": bool(p.get("participated")),
                 "started": bool(p.get("starter")),
                 "shots": to_int(p.get("shots")),
@@ -99,15 +79,30 @@ def parse_boxscore_to_gamestats(boxscore_json):
                 "gw": to_int(goal_types.get("gameWinningGoals")) > 0,
                 "yc": to_int(penalties.get("yellowCards")),
                 "rc": to_int(penalties.get("redCards")),
-            }
-
-            rows.append(row)
+            })
 
     return rows
 
+
+def gamestats_to_csv(rows, filename=GAMESTATS_CSV):
+    if not rows:
+        return
+
+    file_exists = os.path.isfile(filename)
+
+    with open(filename, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=GAMESTATS_FIELDS)
+
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerows(rows)
+
 def populate_game_stats():
-    with open("game_ids.json", "r") as f:
+    with open("../output/game_ids.json", "r") as f:
         game_ids = json.load(f)
+
+    all_rows = []
 
     for i, gid in enumerate(game_ids, 1):
         try:
@@ -119,9 +114,14 @@ def populate_game_stats():
                 continue
 
             rows = parse_boxscore_to_gamestats(boxscore)
-            gamestats_to_csv(rows)
+            all_rows.extend(rows)   # ✅ FIX
 
         except NCAAAPIError as e:
             print(f"Skipping game {gid}: API error {e}")
         except Exception as e:
             print(f"Skipping game {gid}: {e}")
+
+    gamestats_to_csv(all_rows)
+    print(f"Wrote {len(all_rows)} game stat rows")
+
+
