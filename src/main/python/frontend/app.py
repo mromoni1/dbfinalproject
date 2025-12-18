@@ -399,7 +399,23 @@ JOIN Player p ON p.player_id = pl.player_id
 WHERE pl.event_type = 'GOAL'
 GROUP BY pl.game_id;
 """
-    }
+    }, 
+    "most_minutes_played": {
+    "label": "Players with the most total minutes played",
+    "sql": """
+SELECT
+  gs.player_id,
+  gs.first_name,
+  gs.last_name,
+  u.name AS university_name,
+  SUM(gs.minutes) AS total_minutes
+FROM GameStats gs
+JOIN University u ON u.university_id = gs.university_id
+GROUP BY gs.player_id
+ORDER BY total_minutes DESC
+LIMIT 10;
+"""
+}, 
 }
 
 if __name__ == "__main__":
