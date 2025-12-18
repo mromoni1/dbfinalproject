@@ -39,11 +39,12 @@ def main():
     # write_game_ids()
 
     # GAMES
-    populate_games()
+    # populate_games()
 
     # GAMESTATS 
-    #populate_game_stats()
+    populate_game_stats()
     
 
 if __name__ == "__main__":
     main()
+git a
