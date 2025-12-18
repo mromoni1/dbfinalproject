@@ -11,8 +11,9 @@ CSV_TABLES = {
     "src/main/output/University.csv": "University",
     "src/main/output/Rankings.csv": "Rankings",
     "src/main/output/Game.csv": "Game",
-    "src/main/output/GameStats.csv": "GameStats",
+    "src/main/output/Player.csv": "Player",
     "src/main/output/Play.csv": "Play",
+    "src/main/output/GameStats.csv": "GameStats",
 }
 
 CREATION_ORDER = [
@@ -20,9 +21,9 @@ CREATION_ORDER = [
     "University",
     "Rankings",
     "Game",
-    "GameStats",
     "Player",
     "Play",
+    "GameStats",
 ]
 
 
@@ -74,31 +75,6 @@ def execute_schema(conn):
     conn.commit()
 
 # Helpers to populate Player from GameStats and Play
-
-def populate_player_from_gamestats(conn):
-    cur = conn.cursor()
-    cur.execute("""
-        INSERT OR IGNORE INTO Player (
-            player_id,
-            first_name,
-            last_name,
-            class_grade,
-            position,
-            university_id
-        )
-        SELECT DISTINCT
-            player_id,
-            first_name,
-            last_name,
-            NULL,
-            position,
-            university_id
-        FROM GameStats
-        WHERE player_id IS NOT NULL
-    """)
-    conn.commit()
-    print("Inserted Player rows from GameStats")
-
 
 def populate_player_from_play(conn):
     """
@@ -164,6 +140,7 @@ def insert_csv(conn, csv_file, table):
 
             except sqlite3.IntegrityError as e:
                 skipped += 1
+                # print(f"ERROR: {e}")
 
         conn.commit()
 
@@ -182,7 +159,6 @@ def main():
             insert_csv(conn, csv_file, table)
 
     # Populate Player from both sources
-    populate_player_from_gamestats(conn)
     populate_player_from_play(conn)
 
     # Insert Play last (FKs now satisfied)

@@ -34,18 +34,12 @@ QUERIES = { # same as in queries.sql
         "sql": """
 SELECT
   player_id,
-  first_name,
-  last_name,
-  university_id,
   total_goals,
   total_minutes,
   1.0 * total_goals / NULLIF(total_minutes, 0) AS goals_per_minute
 FROM (
   SELECT
     gs.player_id,
-    gs.first_name,
-    gs.last_name,
-    gs.university_id,
     SUM(gs.goals) AS total_goals,
     SUM(gs.minutes) AS total_minutes
   FROM GameStats gs
@@ -183,9 +177,6 @@ ORDER BY away_wins DESC;
 WITH per_player AS (
   SELECT
     gs.player_id,
-    gs.first_name,
-    gs.last_name,
-    gs.university_id,
     SUM(gs.shots) AS shots,
     SUM(gs.shots_on_target) AS sog
   FROM GameStats gs
@@ -194,10 +185,13 @@ WITH per_player AS (
 with_conf AS (
   SELECT
     c.conference_name,
+    plyr.first_name,
+    plyr.last_name,
     p.*,
     1.0 * sog / NULLIF(shots, 0) AS sog_pct
   FROM per_player p
-  JOIN University u ON u.university_id = p.university_id
+  JOIN Player plyr ON p.player_id = plyr.player_id
+  JOIN University u ON u.university_id = plyr.university_id
   JOIN Conference c ON c.conference_id = u.conference_id
   WHERE shots > 0
 ),
@@ -206,7 +200,7 @@ ranked AS (
          ROW_NUMBER() OVER (PARTITION BY conference_name ORDER BY sog_pct DESC) AS rn
   FROM with_conf
 )
-SELECT conference_name, player_id, first_name, last_name, university_id, sog_pct
+SELECT conference_name, player_id, first_name, last_name, sog_pct
 FROM ranked
 WHERE rn = 1
 ORDER BY conference_name;
@@ -237,14 +231,13 @@ ORDER BY avg_goals_per_game DESC;
         "sql": """
 SELECT
   gs.player_id,
-  gs.first_name,
-  gs.last_name,
   u.name AS university_name,
   SUM(gs.goals) AS goals,
   SUM(gs.shots) AS shots,
   1.0 * SUM(gs.goals) / NULLIF(SUM(gs.shots), 0) AS conversion_rate
 FROM GameStats gs
-JOIN University u ON u.university_id = gs.university_id
+JOIN Player p ON gs.player_id = p.player_id
+JOIN University u ON u.university_id = p.university_id
 JOIN Conference c ON c.conference_id = u.conference_id
 WHERE c.conference_name = 'Centennial'
 GROUP BY gs.player_id
@@ -405,12 +398,11 @@ GROUP BY pl.game_id;
     "sql": """
 SELECT
   gs.player_id,
-  gs.first_name,
-  gs.last_name,
   u.name AS university_name,
   SUM(gs.minutes) AS total_minutes
 FROM GameStats gs
-JOIN University u ON u.university_id = gs.university_id
+JOIN Player p ON gs.player_id = p.player_id
+JOIN University u ON u.university_id = p.university_id
 GROUP BY gs.player_id
 ORDER BY total_minutes DESC
 LIMIT 10;

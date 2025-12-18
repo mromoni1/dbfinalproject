@@ -90,17 +90,9 @@ CREATE TABLE GameStats (
     game_id         INTEGER NOT NULL,
     player_id       INTEGER NOT NULL,
 
-    -- player snapshot (denormalized on purpose)
-    first_name      VARCHAR(50),
-    last_name       VARCHAR(50),
-    position        VARCHAR(20),
-    university_id   INTEGER,
-
-    -- participation flags
     played          BOOLEAN,
     started         BOOLEAN,
 
-    -- per-game stats
     shots           INTEGER,
     shots_on_target INTEGER,
     goals           INTEGER,
@@ -116,10 +108,9 @@ CREATE TABLE GameStats (
 
     FOREIGN KEY (game_id)
         REFERENCES Game(game_id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
 
-    FOREIGN KEY (university_id)
-        REFERENCES University(university_id)
+    -- Player reads from GameStats -> explicitly defining FOREIGN KEY (player_id) would not work because Player is not defined yet
 );
 
 
