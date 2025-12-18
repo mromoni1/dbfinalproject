@@ -14,7 +14,6 @@ PLAYER_FIELDS = [
     "university_id",
 ]
 
-
 def load_existing_players():
     """
     Returns a set of (first_name, last_name, university_id)
@@ -77,6 +76,3 @@ def write_players(players):
 
         writer.writerows(players)
 
-
-if __name__ == "__main__":
-    populate_players_from_gamestats()

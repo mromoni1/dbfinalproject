@@ -191,7 +191,3 @@ def populate_plays():
         time.sleep(RATE_LIMIT_DELAY)
 
     print(f"Done. Total plays written: {total}")
-
-
-if __name__ == "__main__":
-    populate_plays()

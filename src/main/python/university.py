@@ -15,6 +15,9 @@ CONF = "all-conf"
 MONTHS = ["08", "09", "10", "11"]
 YEAR = "2025"
 
+UNIVERSITY_CSV = "../output/University.csv"
+CONFERENCE_CSV = "./output/Conference.csv"
+
 
 class NCAAAPIError(Exception):
     pass
@@ -92,7 +95,7 @@ def extract_team(team: dict) -> Optional[dict]:
 
 
 
-def write_conferences_csv(conferences: Dict[str, dict], filename="conferences.csv"):
+def write_conferences_csv(conferences: Dict[str, dict], filename=CONFERENCE_CSV):
     fieldnames = ["conference_id", "name", "seo"]
     with open(filename, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -101,7 +104,7 @@ def write_conferences_csv(conferences: Dict[str, dict], filename="conferences.cs
             w.writerow(conf)
 
 
-def write_universities_csv(universities: Dict[int, dict], filename="universities.csv"):
+def write_universities_csv(universities: Dict[int, dict], filename=UNIVERSITY_CSV):
     fieldnames = ["university_id", "name", "conference_id"]
     with open(filename, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -115,7 +118,7 @@ def write_universities_csv(universities: Dict[int, dict], filename="universities
             })
 
 
-def main():
+def populate_university_conf():
     # 1) Collect all dates with games
     all_dates: List[Tuple[str, str, str]] = []
     for month in MONTHS:
@@ -174,13 +177,9 @@ def main():
                         universities[uid]["conference_id"] = conf_id
 
     # 3) Write outputs
-    write_conferences_csv(conferences, "./csv_files/conferences.csv")
-    write_universities_csv(universities, "./csv_files/universities.csv")
+    write_conferences_csv(conferences, UNIVERSITY_CSV)
+    write_universities_csv(universities, CONFERENCE_CSV)
 
     print(f"Universities written: {len(universities)}")
     print(f"Conferences written: {len(conferences)}")
     print("Done.")
-
-
-if __name__ == "__main__":
-    main()

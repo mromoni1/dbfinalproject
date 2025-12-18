@@ -3,9 +3,9 @@ import os
 import json
 import time 
 from datetime import datetime
-from api import ncaa_get   # ← SAFE, one direction only
+from api import ncaa_get
 
-GAME_CSV_FILE = "octdev.csv"
+GAME_CSV_FILE = "../output/octdev.csv"
 GAME_CSV_FIELDS = [
     "game_id",
     "home_team_id",
@@ -16,6 +16,7 @@ GAME_CSV_FIELDS = [
     "game_date",
     "game_time",
 ]
+
 def normalize_contest_date(date_str):
     for fmt in ("%Y-%m-%d", "%m-%d-%Y", "%m/%d/%Y"):
         try:

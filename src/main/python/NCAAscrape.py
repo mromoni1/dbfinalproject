@@ -2,8 +2,12 @@ import requests
 import time
 import json
 from datetime import datetime
+from university import populate_university_conf
+from rankings import populate_rankings
 from games import populate_games, write_game_ids
 from gamestats import populate_game_stats
+from players import populate_players_from_gamestats
+from plays import populate_plays
 
 BASE_URL = "http://localhost:3000"
 RATE_LIMIT_DELAY = 0.0
@@ -35,15 +39,25 @@ def ncaa_get(path, params=None, headers=None, timeout=30):
 
 
 def main():
-    # COLLECT GAME IDS 
-    # write_game_ids()
+    # UNIVERSITY + CONFERENCE
+    populate_university_conf()
+
+    # RANKINGS
+    populate_rankings()
 
     # GAMES
-    # populate_games()
+    populate_games()
 
     # GAMESTATS 
     populate_game_stats()
     
+    # PLAYERS
+    populate_players_from_gamestats()
+
+    # PLAY-BY-PLAY
+    populate_plays()
+
+
 
 if __name__ == "__main__":
     main()

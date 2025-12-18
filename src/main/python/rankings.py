@@ -3,7 +3,9 @@ import csv
 import time
 from bs4 import BeautifulSoup
 
+
 URL = "https://unitedsoccercoaches.org/rankings/college-rankings/ncaa-diii-women/"
+RANKINGS_CSV = "../output/Rankings.csv"
 RATE_LIMIT_DELAY = 1.0  # be polite
 
 
@@ -63,7 +65,7 @@ def parse_ranking_table(table):
     return rankings
 
 
-def main():
+def populate_rankings():
     html = fetch_html(URL)
     soup = BeautifulSoup(html, "html.parser")
 
@@ -87,14 +89,10 @@ def main():
 
     # Write CSV
     fieldnames = ["rank_week"] + [f"rank_{i}" for i in range(1, 26)]
-    with open("./csv_files/rankings.csv", "w", newline="", encoding="utf-8") as f:
+    with open(RANKINGS_CSV, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for row in rows:
             writer.writerow(row)
 
-    print(f"Wrote {len(rows)} weeks of D3 Women's Soccer rankings to ./csv_files/rankings.csv")
-
-
-if __name__ == "__main__":
-    main()
+    print(f"Wrote {len(rows)} weeks of D3 Women's Soccer rankings to {RANKINGS_CSV}")
