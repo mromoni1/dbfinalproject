@@ -14,7 +14,12 @@ python src/main/python/frontend/app.py # run app
 Used public API from henrygd to scrape consumable data from NCAA.com 
 https://github.com/henrygd/ncaa-api
 
+# SQL 
+SQL schema is defined in D3WomensSoccerSchema.sql.
+SQL queries are defined in a Flask dictionary in src/python/frontend/app.py.
+
 # Limitations / Notes 
+
 Games
 * Some games were skipped because their data was incomplete (missing team ids, null final score, etc.)
 * Implemented a timeout if fetching a games' data took more than 10 seconds. 
@@ -26,7 +31,8 @@ Players
 player_id = hash(f"{team_id}:{first}:{last}") % 10**9 
 * Player grade was not provided by the data source. 
 
-GameStats 
+Universities 
+* The API does not contain city or state information for any school. As such, we decided to adapt our schema for this. We may pivot to using external resources to fill in this information.
 
 PlayerSeasonStats
 * added new table for aggregate stats across the 2025 season
@@ -35,6 +41,3 @@ PlayerSeasonStats
 pip install -r requirements.txt
 python3 ./NCAAscrape.py
 
-# Limitations
-
-The API does not contain city or state information for any school. As such, we decided to adapt our schema for this. We may pivot to using external resources to fill in this information.
