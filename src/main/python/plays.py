@@ -68,6 +68,10 @@ def classify_event(text: Optional[str]) -> str:
         return "FOUL"
     if re.search(r"\bfoulwon\b", t):
         return "FOUL_WON"
+    if re.search(r"\bcardred\b", t):
+        return "RED_CARD"
+    if re.search(r"\bcardyellow\b", t):
+        return "YELLOW_CARD"
     if re.search(r"\bsub\b", t):
         return "SUBSTITUTION"
     if re.search(r"\bcorner\b", t):
@@ -160,15 +164,10 @@ def parse_game_plays(pbp: dict,
                 clock = play.get("clock")
 
                 event_type = classify_event(text)
-                time_of_play = parse_time(clock)
 
                 # Explicit exclusions
-                # if event_type in {"KICKOFF"}:
-                #     continue
-
-                # Drop missing / zero-time events
-                # if not time_of_play or time_of_play == "00:00:00":
-                #     continue
+                if event_type in {"THROW_IN", "OTHER"}:
+                    continue
 
                 rows.append({
                     "play_id": play_id,
@@ -176,7 +175,7 @@ def parse_game_plays(pbp: dict,
                     "player_id": extract_player_id(
                         text, team_id, player_lookup
                     ),
-                    "time_of_play": time_of_play,
+                    "time_of_play": clock,
                     "event_type": event_type,
                     "description": text,
                 })
@@ -187,10 +186,6 @@ def parse_game_plays(pbp: dict,
     return rows
 
 
-# ==========================
-# CSV Writer
-# ==========================
-
 def write_plays(rows: List[dict]):
     file_exists = os.path.isfile(PLAY_CSV_FILE)
 
@@ -200,10 +195,6 @@ def write_plays(rows: List[dict]):
             writer.writeheader()
         writer.writerows(rows)
 
-
-# ==========================
-# Main
-# ==========================
 
 def populate_plays():
     player_lookup = load_players()
