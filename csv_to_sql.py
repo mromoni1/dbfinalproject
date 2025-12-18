@@ -1,0 +1,137 @@
+import sqlite3
+import csv
+import os
+import re
+
+DB_FILE = "D3WomensSoccer.db"
+SCHEMA_FILE = "D3WomensSoccerSchema.sql"
+
+# CSV → TABLE mapping
+CSV_TABLES = {
+    "src/main/output/Conference.csv": "Conference",
+    "src/main/output/University.csv": "University",
+    "src/main/output/Rankings.csv": "Rankings",
+    "src/main/output/Game.csv": "Game",
+    # add others later (Player, GameStats, Play, etc.)
+}
+
+# Enforce creation order to avoid sqlite3.IntegrityError: FOREIGN KEY constraint failed
+CREATION_ORDER = [
+    "Conference",
+    "University",
+    "Rankings",
+    "Game",
+]
+
+
+def connect():
+    conn = sqlite3.connect(DB_FILE)
+    conn.execute("PRAGMA foreign_keys = ON;")
+    return conn
+
+
+def execute_schema(conn):
+    with open(SCHEMA_FILE, "r", encoding="utf-8") as f:
+        schema = f.read()
+
+    statements = [s.strip() for s in schema.split(";") if s.strip()]
+
+    drops = []
+    creates = {}
+
+    for stmt in statements:
+        if stmt.upper().startswith("DROP"):
+            drops.append(stmt + ";")
+        elif stmt.upper().startswith("CREATE"):
+            for table in CREATION_ORDER:
+                if re.search(rf"\bCREATE\s+(TABLE|VIEW)\s+{table}\b", stmt, re.I):
+                    creates[table] = stmt + ";"
+
+    cur = conn.cursor()
+
+    print("Disabling foreign keys for DROP...")
+    cur.execute("PRAGMA foreign_keys = OFF;")
+
+    print("Dropping existing objects...")
+    for d in drops:
+        cur.execute(d)
+
+    conn.commit()
+
+    print("Re-enabling foreign keys...")
+    cur.execute("PRAGMA foreign_keys = ON;")
+
+    print("Creating schema in enforced order...")
+    for table in CREATION_ORDER:
+        if table in creates:
+            print(f"Creating {table}")
+            cur.execute(creates[table])
+
+    conn.commit()
+
+
+
+import sqlite3
+
+def insert_csv(conn, csv_file, table):
+    with open(csv_file, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        cols = reader.fieldnames
+
+        placeholders = ", ".join("?" for _ in cols)
+        sql = f"INSERT INTO {table} ({', '.join(cols)}) VALUES ({placeholders})"
+
+        cur = conn.cursor()
+
+        valid_universities = set()
+        if table == "Game":
+            cur.execute("SELECT university_id FROM University")
+            valid_universities = {row[0] for row in cur.fetchall()}
+
+        inserted = 0
+        skipped = 0
+
+        for row in reader:
+            try:
+                # Enforce D3-vs-D3 only
+                if table == "Game":
+                    home = int(row["home_team_id"])
+                    away = int(row["away_team_id"])
+
+                    if home not in valid_universities or away not in valid_universities:
+                        skipped += 1
+                        continue
+
+                values = tuple(None if row[c] == "" else row[c] for c in cols)
+                cur.execute(sql, values)
+                inserted += 1
+
+            except sqlite3.IntegrityError:
+                skipped += 1
+                continue
+
+        conn.commit()
+
+        print(f"Inserted {inserted} rows into {table}")
+        if skipped:
+            print(f"Skipped {skipped} invalid rows in {table}")
+
+
+
+
+def main():
+    conn = connect()
+    execute_schema(conn)
+
+    for csv_file, table in CSV_TABLES.items():
+        if os.path.exists(csv_file):
+            insert_csv(conn, csv_file, table)
+        else:
+            print(f"Skipping missing file: {csv_file}")
+
+    conn.close()
+    print("Database build complete.")
+
+
+if __name__ == "__main__":
+    main()
