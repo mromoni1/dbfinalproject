@@ -7,6 +7,9 @@ python3 -m pip install -r requirements.txt # make sure requirements are installe
 python ./csv_to_sql.py # populate database with precomputed csv from scraped data 
 python src/main/python/frontend/app.py # run app 
 
+# After running app.py, app will be available at:
+# http://127.0.0.1:5000
+
 # Web Scraping 
 Used public API from henrygd to scrape consumable data from NCAA.com 
 https://github.com/henrygd/ncaa-api
