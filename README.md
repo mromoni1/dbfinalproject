@@ -20,6 +20,11 @@ Players
 player_id = hash(f"{team_id}:{first}:{last}") % 10**9 
 * Player grade was not provided by the data source. 
 
+GameStats 
+
+PlayerSeasonStats
+* added new table for aggregate stats across the 2025 season
+
 # Installation 
 pip install -r requirements.txt
 python3 ./NCAAscrape.py

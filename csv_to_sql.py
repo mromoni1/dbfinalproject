@@ -13,7 +13,6 @@ CSV_TABLES = {
     "src/main/output/Rankings.csv": "Rankings",
     "src/main/output/Game.csv": "Game",
     "src/main/output/GameStats.csv": "GameStats",
-    "src/main/output/Player.csv": "Player",
     # add others later (Player, GameStats, Play, etc.)
 }
 
@@ -26,6 +25,29 @@ CREATION_ORDER = [
     "GameStats",
     "Player",
 ]
+
+def populate_player_from_gamestats(conn):
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT OR IGNORE INTO Player (
+            player_id,
+            first_name,
+            last_name,
+            class_grade,
+            position,
+            university_id
+        )
+        SELECT DISTINCT
+            player_id,
+            first_name,
+            last_name,
+            NULL,
+            position,
+            university_id
+        FROM GameStats
+    """)
+    conn.commit()
+    print("Inserted Player rows from GameStats")
 
 
 def connect():
@@ -94,7 +116,6 @@ def insert_csv(conn, csv_file, table):
 
         inserted = 0
         skipped = 0
-
         for row in reader:
             try:
                 # Enforce D3-vs-D3 only
@@ -132,6 +153,8 @@ def main():
             insert_csv(conn, csv_file, table)
         else:
             print(f"Skipping missing file: {csv_file}")
+
+    populate_player_from_gamestats(conn)
 
     conn.close()
     print("Database build complete.")

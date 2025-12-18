@@ -111,10 +111,6 @@ CREATE TABLE GameStats (
         REFERENCES Game(game_id)
         ON DELETE CASCADE,
 
-    FOREIGN KEY (player_id)
-        REFERENCES Player(player_id)
-        ON DELETE CASCADE,
-
     FOREIGN KEY (university_id)
         REFERENCES University(university_id)
 );
@@ -128,6 +124,40 @@ SELECT
     CASE WHEN shots > 0 THEN shots_on_target * 1.0 / shots END AS shot_pct,
     CASE WHEN shots_on_target > 0 THEN goals * 1.0 / shots_on_target END AS sog_pct
 FROM GameStats gs;
+
+DROP VIEW IF EXISTS PlayerSeasonStats;
+CREATE VIEW PlayerSeasonStats AS
+SELECT
+    gs.player_id,
+    gs.first_name,
+    gs.last_name,
+    gs.position,
+    gs.university_id,
+
+    COUNT(DISTINCT gs.game_id)            AS games_played,
+    SUM(gs.started)                       AS games_started,
+    SUM(gs.minutes)                       AS total_minutes,
+
+    SUM(gs.goals)                         AS total_goals,
+    SUM(gs.assists)                       AS total_assists,
+    SUM(gs.goals * 2 + gs.assists)        AS total_points,
+
+    SUM(gs.shots)                         AS total_shots,
+    SUM(gs.shots_on_target)               AS total_sog,
+
+    CASE
+        WHEN SUM(gs.shots) > 0
+        THEN 1.0 * SUM(gs.shots_on_target) / SUM(gs.shots)
+    END                                   AS season_shot_pct,
+
+    CASE
+        WHEN SUM(gs.shots_on_target) > 0
+        THEN 1.0 * SUM(gs.goals) / SUM(gs.shots_on_target)
+    END                                   AS season_sog_pct
+
+FROM GameStats gs
+GROUP BY gs.player_id;
+
 
 DROP TABLE IF EXISTS Play;
 CREATE TABLE Play (
