@@ -6,7 +6,7 @@ import hashlib
 from math import floor
 from api import ncaa_get, NCAAAPIError
 
-GAMESTATS_CSV = "gamestats.csv"
+GAMESTATS_CSV = "GameStats.csv"
 
 GAMESTATS_FIELDS = [
     "game_id",

@@ -1,0 +1,44 @@
+play_id,game_id,player_id,time_of_play,event_type,description
+1,6532710,,00:10:01,THROW_IN,Throwin(taken)  by Team
+2,6532710,,00:30:03,THROW_IN,Throwin(taken)  by Team
+3,6532710,,01:02:00,OTHER,Goalkick(taken)  by Team
+4,6532710,364912496,01:18:01,SAVE,Save  by Dahlia Bedward
+5,6532710,,01:48:04,THROW_IN,Throwin(taken)  by Team
+6,6532710,,02:10:01,THROW_IN,Throwin(taken)  by Team
+7,6532710,,02:35:03,THROW_IN,Throwin(taken)  by Team
+8,6532710,,03:07:00,CORNER,Corner(taken)  by Team
+9,6532710,364912496,03:31:03,SAVE,Save  by Dahlia Bedward
+10,6532710,,04:18:01,THROW_IN,Throwin(taken)  by Team
+11,6532710,,05:33:03,THROW_IN,Throwin(taken)  by Team
+12,6532710,364912496,06:09:00,SAVE,Save  by Dahlia Bedward
+13,6532710,,06:38:03,THROW_IN,Throwin(taken)  by Team
+14,6532710,,07:11:01,THROW_IN,Throwin(taken)  by Team
+15,6532710,,07:35:03,THROW_IN,Throwin(taken)  by Team
+16,6532710,,08:10:01,THROW_IN,Throwin(taken)  by Team
+17,6532710,364912496,09:27:02,SAVE,Save  by Dahlia Bedward
+18,6532710,,10:09:00,THROW_IN,Throwin(taken)  by Team
+19,6532710,,10:58:05,THROW_IN,Throwin(taken)  by Team
+20,6532710,364912496,11:29:02,SAVE,Save  by Dahlia Bedward
+21,6532710,,12:03:00,SHOT,Shot (blocked;) by Irene Sanchez Burgueño
+22,6532710,,13:13:01,OTHER,Goalkick(taken)  by Team
+23,6532710,2533229867,13:31:03,FOUL_WON,Foulwon  by Megha Salvi
+24,6532710,,13:41:04,FREE_KICK,Freekick(taken)  by Team
+25,6532710,,14:15:01,CORNER,Corner(taken)  by Team
+26,6532710,,14:49:04,THROW_IN,Throwin(taken)  by Team
+27,6532710,,15:16:01,THROW_IN,Throwin(taken)  by Team
+28,6532710,364912496,15:32:03,SAVE,Save  by Dahlia Bedward
+29,6532710,111178346,16:24:02,FOUL_WON,Foulwon  by Ella Kruntchev
+30,6532710,,17:12:01,FREE_KICK,Freekick(taken)  by Team
+31,6532710,,19:16:01,THROW_IN,Throwin(taken)  by Team
+32,6532710,2398102491,20:29:02,SHOT,Shot (goalmouth:outleft;) by Maria Romo-Nichols
+33,6532710,,20:59:05,OTHER,Goalkick(taken)  by Team
+34,6532710,1467601870,21:15:01,FOUL_WON,Foulwon  by Bela Odhiambo
+35,6532710,,21:34:03,FREE_KICK,Freekick(taken)  by Team
+36,6532710,74163087,22:20:02,GOAL,Goal (goalmouth:lowright;from:rightfoot;) by Caroline Marcus
+37,6532710,4227160956,23:03:00,FOUL_WON,Foulwon  by Tatum Adamson
+38,6532710,,23:41:04,FREE_KICK,Freekick(taken)  by Team
+39,6532710,1606541875,23:48:04,FOUL_WON,Foulwon  by Ella Macko
+40,6532710,3253812716,23:50:05,OTHER,Cardyellow(unsporting)  by Ava Gizzie
+41,6532710,,23:50:05,FREE_KICK,Freekick(taken)  by Team
+42,6532710,364912496,23:52:05,SAVE,Save  by Dahlia Bedward
+43,6532710,,22:20:02,OTHER,Comment  by Team

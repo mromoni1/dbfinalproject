@@ -12,6 +12,7 @@ CSV_TABLES = {
     "src/main/output/University.csv": "University",
     "src/main/output/Rankings.csv": "Rankings",
     "src/main/output/Game.csv": "Game",
+    "src/main/output/GameStats.csv": "GameStats",
     # add others later (Player, GameStats, Play, etc.)
 }
 
@@ -21,6 +22,7 @@ CREATION_ORDER = [
     "University",
     "Rankings",
     "Game",
+    "GameStats"
 ]
 
 

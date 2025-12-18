@@ -115,15 +115,19 @@ FROM GameStats gs;
 DROP TABLE IF EXISTS Play;
 CREATE TABLE Play (
     play_id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    game_id      INTEGER,
-    player_id    INTEGER,
-    time_of_play TIME,
-    description  VARCHAR(255),
+    game_id      INTEGER NOT NULL,
+    player_id    INTEGER NULL,
+    event_type VARCHAR(30),
+    time_of_play TIME NULL,
+    description  TEXT NOT NULL,
+
     FOREIGN KEY (game_id)
         REFERENCES Game(game_id)
         ON DELETE CASCADE,
+
     FOREIGN KEY (player_id)
         REFERENCES Player(player_id)
         ON DELETE SET NULL
 );
+
 
